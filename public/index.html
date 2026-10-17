@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101411">
+  <meta name="description" content="暗黑破坏神 II 黑毛进度监控与微信报警">
+  <title>黑毛雷达 · D2R</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="/"><span class="brand-icon">Ⅵ</span><span>黑毛雷达<small>DIABLO II · CLONE WATCH</small></span></a><div class="header-right"><span class="domain">D2R CLONE WATCH</span><select id="language" aria-label="显示语言"><option value="zh-CN">中文</option><option value="en">English</option></select><button id="manage" class="quiet">管理设置</button><button id="logout" class="quiet" hidden>退出管理</button></div></header>
+  <main>
+    <section class="intro"><p class="eyebrow">庇护之地 · 预警哨站</p><h1>恐惧将至，<span>提前知晓。</span></h1><p class="subtitle">每分钟检查黑毛进度，关键时刻通过微信通知你。</p></section>
+    <section id="login" class="panel login" hidden><div><p class="eyebrow">管理入口</p><h2>调整你的报警</h2><p class="muted">进度公开显示。修改监控范围和微信报警需要管理密码。</p></div><form id="login-form"><label for="token">管理密码</label><div class="login-controls"><input id="token" type="password" autocomplete="current-password" required placeholder="管理密码"><button class="primary" type="submit">进入控制台 <span>→</span></button></div></form></section>
+    <div id="dashboard">
+      <section class="overview" aria-label="运行状态"><div><span class="metric-label">雷达状态</span><strong id="radar-status">—</strong></div><div><span class="metric-label">报警阈值</span><strong id="threshold-display">—</strong></div><div><span class="metric-label">最近检查成功</span><strong id="last-check" class="date-value">—</strong></div><div><span class="metric-label">微信通道</span><strong id="push-status">—</strong></div></section>
+      <div id="service-errors" class="notice error" hidden></div>
+      <div id="source-notice" class="notice" hidden></div>
+      <div class="workspace public-view" id="workspace"><section class="panel live"><div class="section-heading"><div><p class="eyebrow">LIVE PROGRESS</p><h2>监控进度</h2></div><button id="refresh" class="quiet">刷新状态 ↻</button></div><p class="muted">显示已保存的监控范围 · 页面每 30 秒更新</p><div id="progress-list" class="progress-list"><p class="empty">正在读取进度…</p></div><div class="live-footer"><span class="dot"></span><span>云端每分钟检查，关闭页面仍会报警</span><button id="check" class="text-button" hidden>立即检查</button></div></section>
+      <section class="panel settings" id="settings-panel" hidden><div class="section-heading"><div><p class="eyebrow">ALERT SETTINGS</p><h2>报警设置</h2></div><label class="switch"><input id="enabled" type="checkbox" form="settings-form"><span>启用报警</span></label></div>
+        <form id="settings-form">
+          <fieldset><legend>服务器 <small>可多选</small></legend><div class="choices"><label><input name="regions" type="checkbox" value="3"><span>亚服</span></label><label><input name="regions" type="checkbox" value="1"><span>美服</span></label><label><input name="regions" type="checkbox" value="2"><span>欧服</span></label></div></fieldset>
+          <fieldset><legend>赛季模式</legend><div class="choices"><label><input name="ladders" type="checkbox" value="1"><span>天梯</span></label><label><input name="ladders" type="checkbox" value="2"><span>非天梯</span></label></div></fieldset>
+          <fieldset><legend>角色模式</legend><div class="choices"><label><input name="hardcore" type="checkbox" value="2"><span>普通</span></label><label><input name="hardcore" type="checkbox" value="1"><span>专家</span></label></div></fieldset>
+          <fieldset><legend>游戏版本</legend><div class="choices"><label><input name="versions" type="checkbox" value="2"><span>术士君临 RotW</span></label><label><input name="versions" type="checkbox" value="1"><span>毁灭之王 LoD</span></label></div><p class="help">默认术士君临。公共 API 同时选两版本时交替查询，各每 2 分钟一次。</p></fieldset>
+          <div class="form-row"><label for="threshold">报警起始进度</label><output id="threshold-value" for="threshold">4 / 6</output></div><input id="threshold" type="range" min="1" max="6" step="1" value="4"><div class="range-ticks"><span>1 · 平静</span><span>6 · 入侵</span></div>
+          <label class="age-label" for="max-age">查询快照有效期（分钟）</label><input id="max-age" type="number" min="5" max="10080" step="1" required><p class="help">按最近成功采集时间判断；进度长期未变不会被误判过期。默认 120 分钟。</p>
+          <div class="rule">达到阈值及以上时，每轮每个进度通知一次。回到进度 1 后开启新一轮。</div><button type="submit" class="primary save">保存设置 <span>→</span></button>
+        </form><button id="test-push" class="test-button">发送微信测试消息 ↗</button>
+      </section></div>
+      <section class="panel history" id="history-panel" hidden><div class="section-heading"><div><p class="eyebrow">ACTIVITY LOG</p><h2>通知记录</h2></div><span class="muted">最近 100 条</span></div><div id="events"></div></section>
+      <p class="footnote">微信通道确认接收后记录成功。网络超时会重试，极少数情况下可能重复送达；未被轮询观测到的中间进度不会补发。</p>
+    </div>
+    <p id="feedback" role="status" aria-live="polite" hidden></p>
+  </main><footer><span>黑毛雷达 <span class="footer-slash">/</span> 为等待少一分焦虑</span><span>Data courtesy of <a id="source-link" href="https://diablo2.io/dclonetracker.php" target="_blank" rel="noreferrer">diablo2.io</a> · <span id="source-kind">D2Emu 自动追踪 · 可人工修正</span></span></footer>
+</body></html>

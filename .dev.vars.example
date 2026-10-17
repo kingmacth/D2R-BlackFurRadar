@@ -1,0 +1,5 @@
+ADMIN_TOKEN="replace-with-a-long-random-password"
+WXPUSH_TOKEN="your-existing-self-hosted-push-token"
+# Request your own D2Emu API access at https://d2emu.com/docs
+D2EMU_USERNAME=""
+D2EMU_TOKEN=""

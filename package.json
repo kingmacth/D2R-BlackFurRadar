@@ -1,0 +1,14 @@
+{
+  "name": "d2r-blackfur-radar",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/wrangler.mjs dev",
+    "deploy": "node scripts/wrangler.mjs deploy",
+    "check": "node --check src/worker.js && node --check src/core.js && node --check src/sources.js && node --check public/app.js && node --check public/i18n.js && node --check scripts/wrangler.mjs",
+    "test": "node --test",
+    "build": "node scripts/wrangler.mjs deploy --dry-run --outdir dist"
+  },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}
