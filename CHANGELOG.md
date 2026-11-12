@@ -4,6 +4,7 @@
 
 ### S16 双流派补充 / Separate S16 builds
 
+- 中英文 README 的两个流派介绍增加线上网站及各语言直达链接，并明确攻略、语言切换和等级查询均无需登录。
 - 新增独立的高速开荒回响恶魔流，中英文完整正文、五阶段进度与 1–65 级查询；保留纯召唤为另一套独立流派，不合并内容。
 - 首页首先突出“快速开荒方案”，两个流派各有独立顶栏入口和卡片。
 - 两页及首页均标明 S16，分别位于 `/guides/s16/echo-demon` 与 `/guides/s16/summon-warlock`；旧链接保留语言参数并跳转 S16。之后的赛季应另建归档目录。
@@ -11,6 +12,8 @@
 - 14 项服务测试及双流派浏览器验证通过，涵盖英文完整性、S16 标记、等级查询、手机布局、旧链接及 CSP。
 
 Added a separate bilingual Echoing Strike & Demons fast-leveling build with five stages and a level 1–65 lookup. Pure Summoner remains a distinct build. The homepage highlights the fast-leveling option first and provides separate navigation links and cards. Both guides are labeled S16 and stored under `/guides/s16/`; legacy links redirect to their S16 edition. Future seasons must have separate archives. Translation coverage, shared language preference, level retention, mobile layout and CSP were checked; all 14 service tests passed.
+
+Both README versions now include live website links for each guide and language, with an explicit note that reading, language switching and level lookup require no login.
 
 ### 新增
 

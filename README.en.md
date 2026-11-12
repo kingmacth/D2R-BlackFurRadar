@@ -23,10 +23,12 @@ See [CHANGELOG.md](CHANGELOG.md) for the full change and verification notes.
 
 ## Separate S16 build guides
 
-| Separate build | Season | Focus |
-| --- | --- | --- |
-| Echoing Strike & Demons | **S16** | **Fast leveling**, featured first on the homepage; player damage with demon blockers and a level 1–65 lookup |
-| Pure Summoner | **S16** | Summon-led damage, with its own skill, gear and farming progression |
+Live website: [DClone Radar](https://d2r.dadwj.com/). **Both guides are public: no login, account or admin password is required**, including language switching and level lookup. Only radar administration, such as alert settings, notification history and WeChat test messages, requires a password.
+
+| Separate build | Season | Focus | Read online |
+| --- | --- | --- | --- |
+| Echoing Strike & Demons | **S16** | **Fast leveling**, featured first on the homepage; player damage with demon blockers and a level 1–65 lookup | [English](https://d2r.dadwj.com/guides/s16/echo-demon?lang=en) · [中文](https://d2r.dadwj.com/guides/s16/echo-demon?lang=zh-CN) |
+| Pure Summoner | **S16** | Summon-led damage, with its own skill, gear and farming progression | [English](https://d2r.dadwj.com/guides/s16/summon-warlock?lang=en) · [中文](https://d2r.dadwj.com/guides/s16/summon-warlock?lang=zh-CN) |
 
 Append these paths to your own deployed site URL:
 
