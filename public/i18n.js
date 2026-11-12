@@ -1,4 +1,7 @@
 const translations = {
+  '开荒指南 ↗': 'Leveling guide ↗',
+  '召唤术士开荒流程图': 'Summon Warlock Leveling Guide',
+  '第16赛季 · 等级加点查询、阶段配装与刷图路线 · 中英文': 'Season 16 · Skill allocation by level, gearing and farming routes · Chinese / English',
   '黑毛雷达': 'DClone Radar', '黑毛雷达 · D2R': 'DClone Radar · D2R',
   '暗黑破坏神 II 黑毛进度监控与微信报警': 'Diablo II Clone progress tracking and WeChat alerts',
   '管理设置': 'Manage alerts', '退出管理': 'Sign out', '显示语言': 'Display language',

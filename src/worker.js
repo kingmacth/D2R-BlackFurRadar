@@ -32,6 +32,10 @@ export default {
       response = json({ ok: true, service: 'd2r-blackfur-radar' });
     } else response = await env.ASSETS.fetch(request);
     response = new Response(response.body, response);
+    if (response.headers.get('content-type')?.includes('text/html')) {
+      response.headers.set('cache-control', 'no-store');
+      response.headers.set('cdn-cache-control', 'no-store');
+    }
     for (const [k,v] of Object.entries(securityHeaders)) response.headers.set(k,v);
     return response;
   },

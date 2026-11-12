@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>召唤术士开荒流程图 · Summon Warlock Leveling Guide · 第16赛季 Season 16</title>
+
+
+
+    <link rel="stylesheet" href="/guides/summon-warlock.css" />
+  </head>
+  <body>
+    <!-- 黑毛雷达分页面顶栏 / Black Fur Radar subpage bar -->
+    <div class="radarbar"><div class="inner">
+      <a class="brand" href="/" id="radar-home"><span id="radar-brand">← 黑毛雷达 · 开荒指南</span><small id="radar-sub">D2R Black Fur Radar — Leveling subpage · 收藏本页即可随时打开查加点</small></a>
+      <div class="langswitch" role="group" aria-label="Language / 语言">
+        <span class="lbl" id="guide-language-label">显示语言</span>
+        <button type="button" class="langbtn on" id="btn-zh">中文</button>
+        <button type="button" class="langbtn" id="btn-en">English</button>
+      </div>
+    </div></div>
+    <div class="wrap" id="wrapZh">
+
+      <!-- ================= HERO ================= -->
+      <header class="hero">
+        <img src="/guides/warlock-98be658bcaf2.webp" alt="兜帽术士手持发光魔典，指挥三只羊头人与一只被束缚的恶魔骑士" />
+        <div class="veil"></div>
+        <div class="htext">
+          <h1>召唤术士开荒流程图</h1>
+          <p>第 16 赛季 · 补丁 3.4（纯物品补丁，召唤术士技能无改动，上赛季打法原样可用）。一条主线：羊头人开局 → 三只恶魔 → 30 级束缚恶魔 → 抓超级暗金毕业。</p>
+          <div class="chips">
+            <span class="chip">赛季开启 <b>11月14日 09:00</b></span>
+            <span class="chip">恐怖遗产活动 <b>11月14日–20日</b></span>
+            <span class="chip">黑毛每 <b>6 小时</b>必刷 · 全程 <b>+100% MF</b></span>
+            <span class="chip">核心三满 <b>束缚恶魔 / 恶魔精通 / 羊头人</b></span>
+          </div>
+        </div>
+      </header>
+
+      <nav class="nav"><div class="row">
+        <a href="#flow">总览路线</a><a href="#calc">等级速查</a><a href="#phases">分阶段流程</a>
+        <a href="#final">毕业加点</a><a href="#runewords">符文之语</a><a href="#farm">刷取地图</a><a href="#event">活动与黑毛</a>
+      </div></nav>
+
+      <!-- ================= OVERVIEW ================= -->
+      <section id="flow">
+        <h2><span class="no">◆</span>总览路线</h2>
+        <p class="sub">七个阶段，从建号到能蹲黑毛。点任意节点跳到该阶段详情。</p>
+        <div class="flow">
+          <a class="fnode" href="#p1"><div class="lv">Lv 1–12</div><div class="nm">羊头人起家</div><div class="ds">普通 A1–A2，精通点到 5，出第 2 只恶魔</div></a><div class="farr">→</div>
+          <a class="fnode" href="#p2"><div class="lv">Lv 13–24</div><div class="nm">三只成军</div><div class="ds">精通到 10 出第 3 只，羊头人点满</div></a><div class="farr">→</div>
+          <a class="fnode" href="#p3"><div class="lv">Lv 25–30</div><div class="nm">精神 + 束缚</div><div class="ds">做精神剑，30 级点束缚恶魔抓第一只普通恶魔</div></a><div class="farr">→</div>
+          <a class="fnode" href="#p4"><div class="lv">Lv 31–49</div><div class="nm">束缚点满</div><div class="ds">噩梦通关，束缚到 20 解锁抓超级暗金</div></a><div class="farr">→</div>
+          <a class="fnode" href="#p5"><div class="lv">Lv 50–65</div><div class="nm">进地狱</div><div class="ds">精通点满，抗性补齐，刷墨菲斯托</div></a><div class="farr">→</div>
+          <a class="fnode" href="#p6"><div class="lv">Lv 66–80</div><div class="nm">活动周冲刺</div><div class="ds">全图恐惧 + 牛场，蹲黑毛拿毁灭</div></a><div class="farr">→</div>
+          <a class="fnode" href="#p7"><div class="lv">Lv 81+</div><div class="nm">毕业成型</div><div class="ds">死亡印记满、CTA 副手、贺拉森/橡树</div></a>
+        </div>
+      </section>
+
+      <!-- ================= CALCULATOR ================= -->
+      <section id="calc">
+        <h2><span class="no">◆</span>等级速查：我现在该点什么</h2>
+        <p class="sub">拖到你的当前等级，直接看这一级的技能状态、属性目标和要做的事。含任务奖励点（邪恶巢穴 +1、拉达曼特 +1、泰瑞尔 +2 / 每难度）。</p>
+        <div class="calc">
+          <div class="top">
+            <label for="lv">当前等级</label>
+            <input type="range" id="lv" min="1" max="90" value="30" step="1" />
+            <div class="lvbig"><span id="lvnum">30</span> <small>级</small></div>
+          </div>
+          <div class="quick" id="quick"></div>
+          <div class="calcgrid">
+            <div class="cell"><h4>技能状态（累计）</h4><p id="c-skill"></p></div>
+            <div class="cell"><h4>属性目标</h4><p id="c-stat"></p></div>
+            <div class="cell"><h4>现在该做的事</h4><p id="c-task"></p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PHASES ================= -->
+      <section id="phases">
+        <h2><span class="no">◆</span>分阶段流程</h2>
+        <p class="sub">加点原则只有一句：<b>先保证恶魔数量和羊头人伤害，再为束缚恶魔的「抓超级暗金」门槛存点。</b>3.2 起数量与抓取门槛只认硬点（自己投的点），装备 +技能不算。</p>
+        <div class="tl">
+
+          <article class="phase" id="p1">
+            <h3><span class="lvtag">阶段一 · Lv 1–12</span>羊头人起家</h3>
+            <p class="route">路线：普通 A1（邪恶巢穴 → 崔斯特瑞姆救凯恩）→ A2 沙漠。佣兵先用 A1 罗格过渡。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li>Lv1：<span class="sk">召唤羊头人 1</span>——开局全部输出</li>
+                <li>Lv2–5：<span class="sk">恶魔精通 → 5</span>，硬点满 5 解锁<b>第 2 只</b>恶魔</li>
+                <li>Lv6：<span class="sk">死亡印记 1</span>——把羊头人直接传送到怪脸上并降防，刷 Boss 神技</li>
+                <li>Lv7–11：羊头人继续加（约到 7–8），有富余先存着等精通</li>
+                <li>Lv12：<span class="sk">污染魔 1</span>（过路，往污秽者/束缚方向走）</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>力量：先加到 <b>25–35</b>（穿轻甲、拿魔典）</li>
+                <li>敏捷：<b>不加</b>；精力：<b>不加</b>（喝蓝药过渡）</li>
+                <li>其余<b>全部活力</b>——这条规则全程不变</li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li>商店和掉落里淘 <b>+羊头人 / +恶魔技能的魔典</b>（术士副手），加 1 级都是质变</li>
+                <li>其余部位只看：生命、抗性、跑速，怎么活怎么来</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li>符文起步：<b>遗忘之塔地窖 5 层女伯爵</b>（黑色荒地），反复刷塔尔（7号）、拉尔（8号）</li>
+                <li>经验：崔斯特瑞姆、泰摩高地，怪密等级合适</li>
+              </ul></div>
+            </div>
+            <div class="key">本阶段验收：<b>2 只羊头人 + 死亡印记</b>，安达利尔站后面看戏就行。</div>
+          </article>
+
+          <article class="phase" id="p2">
+            <h3><span class="lvtag">阶段二 · Lv 13–24</span>三只成军，羊头人点满</h3>
+            <p class="route">路线：普通 A3 → A4 → A5。17 级做隐密，推图速度明显起飞。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li>Lv13–17：<span class="sk">恶魔精通 → 10</span>，硬点满 10 解锁<b>第 3 只</b>恶魔——全流派第一个大节点</li>
+                <li>Lv18 前后各 1 点过路：<span class="sk">污秽者 1、暴食 1</span>（束缚恶魔的前置链）、<span class="sk">血誓 1</span>（给召唤物减伤/保命）、<span class="sk">迟缓咒印 1</span>、<span class="sk">飞刃传形 1</span>（位移跑图）</li>
+                <li>Lv19–24：<span class="sk">召唤羊头人 → 20 点满</span>（含任务奖励点，约 24 级满）</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>力量：补到 <b>35–45</b> 够穿隐密甲和后续装备即可</li>
+                <li>其余全部活力，此时血量应明显厚于同级法系</li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li><b>隐密</b>（17 级）：塔尔 7号 + 伊司 5号，2 孔甲——跑速/施法/打击恢复全给</li>
+                <li>通关 A5 后任务直接送 <b>远古誓言</b>的符文组（拉尔 8号 + 欧特 9号 + 塔尔 7号），做盾补抗</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li>经验：A5 世界之石要塞刷巴尔小队（普通巴尔 Run）</li>
+                <li>通关后开<b>普通奶牛关</b>：捡一把水晶剑留着——下阶段做精神用</li>
+              </ul></div>
+            </div>
+            <div class="key">本阶段验收：<b>3 只满级羊头人</b>。羊头人自带压碎性打击，打 Boss 比你想象中快得多。</div>
+          </article>
+
+          <article class="phase" id="p3">
+            <h3><span class="lvtag">阶段三 · Lv 25–30</span>精神出鞘，束缚恶魔解锁</h3>
+            <p class="route">路线：进噩梦 A1–A2。25 级精神剑是整个开荒最大的单件提升。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li>Lv25–29：<span class="sk">死亡印记补到 8 左右</span>（降防增伤的甜点区），其余<b>存点</b></li>
+                <li>Lv30：<span class="sk">束缚恶魔 1</span>——立刻去抓第一只绑定恶魔</li>
+                <li>1 点只能抓<b>普通恶魔</b>：先在 A4 火焰之河抓一只顺手的近战恶魔过渡即可。铸甲师海法斯特是超级暗金，要等束缚硬点满 20（阶段四）才能抓——他会放伤害加深，是中期的头号目标，别 30 级就白跑一趟</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>力量：补到 <b>55 左右</b>，够精神剑和噩梦期装备</li>
+                <li>其余全部活力</li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li><b>精神剑</b>（25 级）：普通牛场水晶剑 → 拉苏克打孔（必 4 孔）→ 塔尔 7号 + 图尔 10号 + 欧特 9号 + 安姆 11号</li>
+                <li><b>知识</b>头（27 级）：欧特 9号 + 索尔 12号，+1 全技能</li>
+                <li>换 <b>A2 佣兵</b>：噩梦进攻型（力量光环）给全队物理增伤；给他攒 4 孔长柄做眼光</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li>符文：<b>噩梦女伯爵</b>——索尔（12号）等中级符文主要来源，特有掉落最高到科（18号）</li>
+                <li>底材：噩梦奶牛关捡 4 孔长柄（或无孔长柄用拉苏克/方块打孔）</li>
+              </ul></div>
+            </div>
+            <div class="key">本阶段验收：<b>精神剑 + 1 只绑定恶魔</b>。注意绑定恶魔跨房间保留，但<b>角色死亡、恶魔死亡、洗点</b>都会解除，死了要重抓。</div>
+          </article>
+
+          <article class="phase" id="p4">
+            <h3><span class="lvtag">阶段四 · Lv 31–49</span>束缚恶魔点满——全流派核心工程</h3>
+            <p class="route">路线：噩梦 A3–A5 通关。这一阶段不做别的，所有点优先喂束缚恶魔。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li><span class="sk">束缚恶魔 → 20 点满</span>（约 49 级，含三难度任务点进度）</li>
+                <li>为什么必须硬点满：抓取门槛只认硬点——<b>10 点抓头目级、15 点抓暗金、20 点抓超级暗金</b></li>
+                <li>沿途里程碑：5/10/15/20 级给绑定恶魔额外强壮、特别快速、幽灵打击、光环附魔等词缀</li>
+                <li>点满后第一件事：回 A4 火焰之河抓<b>铸甲师海法斯特</b>（会放伤害加深，全队受益）；再往后目标是带<b>狂热/信念/力量光环</b>的超级暗金恶魔（如李斯特一类），一只顶半支军队</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>力量：<b>70–90</b> 区间，按身上装备需求随时补</li>
+                <li>其余全部活力；噩梦抗性惩罚 −40，装备开始优先补抗</li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li>佣兵<b>眼光</b>（27 级起可做）：拉尔 8号 + 特尔 3号 + 塔尔 7号 + 索尔 12号，4 孔长柄——冥思光环解决全队蓝量</li>
+                <li>抗性不够就换<b>烟雾</b>甲：内夫 4号 + 卢姆 17号，+50 全抗过渡地狱</li>
+                <li>继续淘 +恶魔技能魔典、+技能项链/戒指（婚戒、乔丹这类随缘）</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li>装备起步：<b>噩梦墨菲斯托</b>（A3 憎恨囚牢 3 层），召唤流站桩刷，性价比全噩梦最高</li>
+                <li>经验：噩梦巴尔 Run 到 45+ 再考虑进地狱</li>
+              </ul></div>
+            </div>
+            <div class="key">本阶段验收：<b>束缚恶魔 20 硬点</b>。从这一刻起，你抓的每一只超级暗金都是永久编制（不死不掉）。</div>
+          </article>
+
+          <article class="phase" id="p5">
+            <h3><span class="lvtag">阶段五 · Lv 50–65</span>进地狱：精通点满，抗性毕业</h3>
+            <p class="route">路线：地狱 A1–A3。地狱抗性惩罚 −100，进门先看面板，火/电抗尽量往正了补。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li><span class="sk">恶魔精通 → 20 点满</span>：全队恶魔的伤害、攻速、命中、移速一起涨，绑定恶魔同样受益</li>
+                <li>富余点先给<span class="sk">红液沸腾 1+</span>或继续死亡印记，按手感来</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>分叉点：打算用<b>精神盾</b>（统治者大盾）就把力量往 <b>156</b> 推；不做盾流就停在装备需求</li>
+                <li>其余全部活力，地狱期目标血量 1000+</li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li><b>精神盾</b>：4 孔统治者大盾（牛场/85 区掉落）做第二件精神，主副手双 +2 技能</li>
+                <li>盯上<b>贺拉森套装</b>部件：凑两件就有 +恶魔技能，是橡树之心之外的毕业方向</li>
+                <li>3.4 新版<b>钢铁面纱</b>（+2 全技能、物理减伤）只在天梯掉新版——打到先留着，力量需求 192，后期再说</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li><b>地狱墨菲斯托</b>：毕业装主产地，贺拉森部件、技能装都从这儿起步</li>
+                <li><b>地狱女伯爵</b>：特有掉落最高罗（28号），也是攒中符换高符的稳定来源</li>
+                <li>85 级区域：地穴、古代通道（无火免怪时友好）、混沌庇难所</li>
+              </ul></div>
+            </div>
+            <div class="key">本阶段验收：<b>三核心满了两个半</b>（束缚 20 / 精通 20 / 羊头人 20），地狱 A5 能站住。</div>
+          </article>
+
+          <article class="phase" id="p6">
+            <h3><span class="lvtag">阶段六 · Lv 66–80</span>活动周冲刺：恐惧地带 + 黑毛</h3>
+            <p class="route">路线：地狱通关杀巴尔 → 恐怖遗产活动全开。这一段的效率是平时的两倍以上，优先把活动吃满。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li><span class="sk">死亡印记 → 20 点满</span>：降防 + 增伤拉满，羊头人压碎性打击跟着受益，是打黑毛的关键技能</li>
+                <li>之后补<span class="sk">血誓 → 12 左右</span>，给绑定恶魔加血上限和全抗</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>维持现状：力量够装备（或 156 精神盾），其余活力</li>
+                <li>三难度属性任务（艾尔·亚兹德药剂 +15、黄金鸟 +60 生命等）别漏</li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li>攒符文做<b>战争召唤</b>副手（配方见下）：开打前号令 → 体制两吼，全队血蓝上限一起涨</li>
+                <li>恶魔技能<b>超大护身符（技能板）</b>、术士<b>地狱火炬</b>、毁灭小符——按这个顺序补</li>
+                <li>佣兵进阶：眼光 → 有条件换高伤武器 + 吸血头（安达利尔的面容）</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li>活动期杀巴尔后<b>全图变恐惧地带</b>：挑混沌庇难所、世界之石、牛场轮刷</li>
+                <li><b>奶牛关常驻</b>（活动期不用维特之腿）：刷底材和高符</li>
+                <li><b>黑毛</b>：每 6 小时整点场次，带压碎的羊头人 + 死亡印记硬啃，掉毁灭小符</li>
+              </ul></div>
+            </div>
+            <div class="key">本阶段验收：<b>地狱通关 + 第一块毁灭到手</b>。赛季初的毁灭在天梯很值钱，自己不用也能换毕业装。</div>
+          </article>
+
+          <article class="phase" id="p7">
+            <h3><span class="lvtag">阶段七 · Lv 81+</span>毕业成型与长期刷宝</h3>
+            <p class="route">路线：恐惧地带轮刷 + 85 区 + 交易补缺。召唤流成型后操作趋近于零，适合长期挂机式刷宝。</p>
+            <div class="cols">
+              <div><h4>技能加点</h4><ul>
+                <li>剩余点：<span class="sk">暴食</span>补满方向（吞尸给全队回血续航），或按手感补红液沸腾</li>
+                <li>洗点只有一次刚需场景：想换格挡流/双持流派时，用泰瑞尔洗点或遗忘药剂整体重构</li>
+              </ul></div>
+              <div><h4>属性点</h4><ul>
+                <li>定稿：力量 = 装备需求（精神盾流 156），敏捷 0，精力 0，<b>活力拉满</b></li>
+              </ul></div>
+              <div><h4>装备目标</h4><ul>
+                <li>主手毕业二选一：<b>橡树之心</b>（连枷）或高技能魔典 + 贺拉森套装</li>
+                <li>副手定稿：<b>战争召唤 + 精神盾</b>，进图先吼再切回主手</li>
+                <li><b>谜团</b>不是刚需：死亡印记本身就能把队伍瞬移到怪脸上，符文先紧着 CTA 和橡树</li>
+              </ul></div>
+              <div><h4>在哪里刷</h4><ul>
+                <li>恐惧地带（常驻轮换）：混沌庇难所、崔凡科、牛场</li>
+                <li>高符：地狱牛场、混沌庇难所、女伯爵三点一线</li>
+              </ul></div>
+            </div>
+            <div class="key">打法循环定稿：<b>召唤三羊 + 抓好的绑定恶魔 → 死亡印记点名 → 站后面捡东西</b>。补 buff 顺序永远是战争召唤先号令、后体制。</div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================= FINAL BUILD ================= -->
+      <section id="final">
+        <h2><span class="no">◆</span>毕业加点总表（硬点）</h2>
+        <p class="sub">总投入约 100 点（含三难度 12 点任务奖励，约 88 级成型），剩余点继续喂暴食。</p>
+        <div class="final">
+          <div class="f"><span class="pts">20</span><b>束缚恶魔</b><p>抓超级暗金的门槛，只认硬点，必须满</p></div>
+          <div class="f"><span class="pts">20</span><b>恶魔精通</b><p>10 点解锁第 3 只恶魔，满级全队增伤/攻速</p></div>
+          <div class="f"><span class="pts">20</span><b>召唤羊头人</b><p>前期主力 + 后期压碎性打击打 Boss</p></div>
+          <div class="f"><span class="pts">20</span><b>死亡印记</b><p>传送全军 + 降防增伤，点名秒精英</p></div>
+          <div class="f"><span class="pts">~12</span><b>血誓</b><p>绑定恶魔的血量上限与全抗</p></div>
+          <div class="f"><span class="pts">1</span><b>污染魔 / 污秽者</b><p>过路点，通往束缚恶魔的前置链</p></div>
+          <div class="f"><span class="pts">1</span><b>暴食</b><p>过路（后期富余点继续加，吞尸回血）</p></div>
+          <div class="f"><span class="pts">1</span><b>红液沸腾</b><p>过路，给召唤物增伤的血系技能</p></div>
+          <div class="f"><span class="pts">1</span><b>迟缓咒印</b><p>与死亡印记叠加的双重减益</p></div>
+          <div class="f"><span class="pts">1</span><b>飞刃传形</b><p>邪术系位移，跑图/脱困用</p></div>
+        </div>
+        <div class="note" data-guide-layout="guide-layout-1"><b>属性定稿：</b>力量 = 装备需求（隐密期 35 → 精神剑 55 → 精神盾流最高 156）；敏捷 0；精力 0（靠佣兵眼光回蓝）；<b>其余全部活力</b>。</div>
+      </section>
+
+      <!-- ================= RUNEWORDS ================= -->
+      <section id="runewords">
+        <h2><span class="no">◆</span>关键符文之语（按出场顺序）</h2>
+        <p class="sub">符文带号数标注。底材必须是<b>无孔白装打孔/天生孔数的灰字装备</b>，蓝装带孔做不了符文之语，顺序错一位直接报废。</p>
+        <div class="grid">
+          <div class="rw"><h3>隐密 <span class="en">Stealth · 17 级 · 2 孔盔甲</span></h3>
+            <div class="runes"><span class="rune">塔尔<small>7号</small></span><span class="plus">+</span><span class="rune">伊司<small>5号</small></span></div>
+            <p>跑速 + 施法速度 + 打击恢复，开荒第一件成装，穿到噩梦没问题。</p>
+            <p class="where">获取：<b>女伯爵</b>刷塔尔/伊司，A2 商店买 2 孔轻甲</p></div>
+          <div class="rw"><h3>精神 <span class="en">Spirit · 25 级 · 4 孔剑 / 盾</span></h3>
+            <div class="runes"><span class="rune">塔尔<small>7号</small></span><span class="plus">+</span><span class="rune">图尔<small>10号</small></span><span class="plus">+</span><span class="rune">欧特<small>9号</small></span><span class="plus">+</span><span class="rune">安姆<small>11号</small></span></div>
+            <p>+2 全技能、高施法、大量法力。先做剑，地狱再做统治者大盾版，主副双持。</p>
+            <p class="where">获取：普通牛场水晶剑 → <b>拉苏克打孔</b>必 4 孔；符文刷女伯爵</p></div>
+          <div class="rw"><h3>知识 <span class="en">Lore · 27 级 · 2 孔头盔</span></h3>
+            <div class="runes"><span class="rune">欧特<small>9号</small></span><span class="plus">+</span><span class="rune">索尔<small>12号</small></span></div>
+            <p>最便宜 +1 技能头，带电抗和杀敌回蓝，过渡到技能头/贺拉森之前一直戴。</p>
+            <p class="where">获取：索尔主要靠<b>噩梦女伯爵</b></p></div>
+          <div class="rw"><h3>眼光 <span class="en">Insight · 27 级 · 4 孔长柄（佣兵）</span></h3>
+            <div class="runes"><span class="rune">拉尔<small>8号</small></span><span class="plus">+</span><span class="rune">特尔<small>3号</small></span><span class="plus">+</span><span class="rune">塔尔<small>7号</small></span><span class="plus">+</span><span class="rune">索尔<small>12号</small></span></div>
+            <p>给 A2 佣兵：冥思光环全队回蓝，召唤流从此不用喝蓝药。做两把留着换底材。</p>
+            <p class="where">获取：噩梦牛场/路边 4 孔长柄，或拉苏克打孔</p></div>
+          <div class="rw"><h3>远古誓言 <span class="en">Ancient's Pledge · 21 级 · 3 孔盾</span></h3>
+            <div class="runes"><span class="rune">拉尔<small>8号</small></span><span class="plus">+</span><span class="rune">欧特<small>9号</small></span><span class="plus">+</span><span class="rune">塔尔<small>7号</small></span></div>
+            <p>全抗大盾，地狱进门抗性告急时的救命件。</p>
+            <p class="where">获取：符文组由<b>A5 第二任务「救援亚瑞特山脉的野蛮人」</b>直接发放（夸尔凯克给拉尔+欧特+塔尔）</p></div>
+          <div class="rw"><h3>烟雾 <span class="en">Smoke · 37 级 · 2 孔盔甲</span></h3>
+            <div class="runes"><span class="rune">内夫<small>4号</small></span><span class="plus">+</span><span class="rune">卢姆<small>17号</small></span></div>
+            <p>+50 全抗，进地狱前最稳的过渡甲，隐密扛不住时换它。</p>
+            <p class="where">获取：卢姆刷<b>噩梦女伯爵</b>（特有掉落范围内）</p></div>
+          <div class="rw"><h3>战争召唤 <span class="en">Call to Arms · 51 级 · 5 孔武器（副手）</span></h3>
+            <div class="runes"><span class="rune">安姆<small>11号</small></span><span class="plus">+</span><span class="rune">拉尔<small>8号</small></span><span class="plus">+</span><span class="rune">玛尔<small>23号</small></span><span class="plus">+</span><span class="rune">伊斯特<small>24号</small></span><span class="plus">+</span><span class="rune">欧姆<small>27号</small></span></div>
+            <p>副手战吼：<b>先战斗号令（全队技能 +1），再战斗体制（血/蓝/耐上限）</b>，顺序别反。看货只看战斗体制等级，+6 最贵。</p>
+            <p class="where">获取：欧姆靠地狱牛场/混沌庇难所或交易；底材用水晶剑省事</p></div>
+          <div class="rw"><h3>橡树之心 <span class="en">Heart of the Oak · 55 级 · 4 孔连枷</span></h3>
+            <div class="runes"><span class="rune">科<small>18号</small></span><span class="plus">+</span><span class="rune">伐克斯<small>26号</small></span><span class="plus">+</span><span class="rune">普尔<small>21号</small></span><span class="plus">+</span><span class="rune">图尔<small>10号</small></span></div>
+            <p>+3 全技能、40 施法、+40 全抗，主手毕业武器之一；与贺拉森套装路线二选一即可。</p>
+            <p class="where">获取：伐克斯靠地狱牛场/恐惧地带或交易合成</p></div>
+          <div class="rw"><h3>刚毅 <span class="en">Fortitude · 59 级 · 4 孔盔甲（佣兵）</span></h3>
+            <div class="runes"><span class="rune">艾尔<small>1号</small></span><span class="plus">+</span><span class="rune">索尔<small>12号</small></span><span class="plus">+</span><span class="rune">多尔<small>14号</small></span><span class="plus">+</span><span class="rune">罗<small>28号</small></span></div>
+            <p>佣兵毕业甲：300% 增强伤害。罗（28号）是全表最贵的一块，先给佣兵穿、自己用烟雾/贺拉森顶着都行。</p>
+            <p class="where">获取：罗靠地狱女伯爵特有掉落上限、牛场或交易</p></div>
+        </div>
+      </section>
+
+      <!-- ================= FARM ================= -->
+      <section id="farm">
+        <h2><span class="no">◆</span>刷取地图：要什么，去哪刷</h2>
+        <p class="sub">按目标查地点。女伯爵是符文地基，墨菲斯托是装备地基，牛场是底材和高符地基。</p>
+        <table>
+          <thead><tr><th>目标</th><th>地点</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td data-h="目标"><b>低级符文</b>（塔尔7/拉尔8/欧特9/图尔10/安姆11）</td><td data-h="地点">遗忘之塔地窖 5 层 · 女伯爵（普通/噩梦）</td><td data-h="说明">普通特有掉落最高拉尔（8号）；噩梦到科（18号）。开荒期反复刷，精神/隐密/知识全靠她</td></tr>
+            <tr><td data-h="目标"><b>中高级符文</b>（玛尔23/伊斯特24/欧姆27/罗28）</td><td data-h="地点">地狱女伯爵 + 地狱牛场 + 混沌庇难所</td><td data-h="说明">女伯爵特有掉落最高罗（28号），胜在稳定；欧姆以上更多靠牛场/混沌的量</td></tr>
+            <tr><td data-h="目标"><b>精神剑底材</b>（水晶剑）</td><td data-h="地点">普通奶牛关</td><td data-h="说明">普通牛掉的水晶剑找拉苏克打孔必出 4 孔，全游戏最稳的精神底材来源</td></tr>
+            <tr><td data-h="目标"><b>眼光底材</b>（4 孔长柄）</td><td data-h="地点">噩梦奶牛关 / 噩梦路边掉落</td><td data-h="说明">优先巨神之斧、锐斧等高伤底材；无孔的用拉苏克或方块公式打孔</td></tr>
+            <tr><td data-h="目标"><b>精神盾底材</b>（统治者大盾）</td><td data-h="地点">地狱牛场、85 级区域、恐惧地带</td><td data-h="说明">只有统治者大盾能出 4 孔（非圣骑士），力量需求 156，先想好属性再做</td></tr>
+            <tr><td data-h="目标"><b>+技能魔典 / 贺拉森套装</b></td><td data-h="地点">噩梦→地狱墨菲斯托、地狱恐惧地带</td><td data-h="说明">魔典全程随掉随淘（看 +恶魔技能词缀）；贺拉森部件主要靠地狱墨菲斯托和交易补齐</td></tr>
+            <tr><td data-h="目标"><b>技能板 / 火炬 / 毁灭</b></td><td data-h="地点">地狱 85 区（技能板）· 超级崔斯特瑞姆（火炬）· 黑毛活动（毁灭）</td><td data-h="说明">恶魔技能超大护身符刷 85 区精英；火炬要凑钥匙开 6 Boss，后期目标</td></tr>
+            <tr><td data-h="目标"><b>绑定恶魔猎物</b></td><td data-h="地点">A4 火焰之河 · A5 世界之石</td><td data-h="说明">30 级先抓普通恶魔过渡；束缚 20 硬点后抓铸甲师（伤害加深）和带狂热/信念/力量光环的超级暗金（李斯特等）</td></tr>
+            <tr><td data-h="目标"><b>经验</b></td><td data-h="地点">普通/噩梦巴尔 Run → 地狱恐惧地带</td><td data-h="说明">召唤流刷巴尔小队很稳；地狱后恐惧地带的经验和掉落双高</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ================= EVENT ================= -->
+      <section id="event">
+        <h2><span class="no">◆</span>活动周安排：恐怖遗产（11月14日 09:00 – 11月20日 09:00）</h2>
+        <p class="sub">地狱黑毛（超级暗黑破坏神）每 6 小时必刷一次，全程 +100% MF；任意难度杀巴尔后该难度全图变恐惧地带；牛场传送门常驻。天梯、非天梯都有。</p>
+        <div class="cols" data-guide-layout="guide-layout-2">
+          <div class="note"><b>黑毛场次（北京时间，每天循环）：</b>
+            <div class="times"><span>03:00</span><span>09:00</span><span>15:00</span><span>21:00</span></div>
+            提前几分钟进地狱难度房间等刷新即可，不用再等卖乔丹的消息。召唤流打法：三羊 + 绑定恶魔围殴，死亡印记点名，压碎性打击磨血。
+          </div>
+          <div class="note"><b>你 15 号回家后的接法（只亏头 4 场，后面还有约 20 场）：</b><br />
+            ① 先用<b>非赛季毕业术士</b>（橡树之心、贺拉森都在）直接蹲黑毛 + 刷全图恐惧，把活动最肥的部分先吃掉；<br />
+            ② 天梯新号晚上慢慢推，按本页流程走，练到地狱正好接上后面几天的黑毛场次；<br />
+            ③ 活动期商店/赌博 85 折，赌项链戒指顺手做。
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <p class="src">加点与机制参考：
+          <a href="https://www.icy-veins.com/d2/demon-warlock-build-skills" target="_blank" rel="noopener">Icy Veins · Demon Warlock 技能加点</a> ·
+          <a href="https://m.163.com/dy/article/KTIM36NH05465VOH.html" target="_blank" rel="noopener">网易 · 恶魔术士 3.2 低成本开荒搭配</a> ·
+          <a href="https://www.mmogah.com/news/diablo-2/d2r-season-16-starter-gear-guide-budget-runewords-upgrades" target="_blank" rel="noopener">第 16 赛季开荒装备与符文之语指南</a> ·
+          <a href="https://www.diablobytes.com/d2-resurrected/guides/warlock-guide/" target="_blank" rel="noopener">Warlock 职业机制总览（3.2/3.3 变更）</a>
+        </p>
+      </section>
+
+      <footer>召唤术士开荒流程图 · 第 16 赛季 / 补丁 3.4 · 技能机制以 3.2 起的硬点规则为准（恶魔数量 5 点→2 只、10 点→3 只；束缚抓取门槛 10/15/20 硬点）。符文号数为国服通用编号。本页为黑毛雷达分页面，右上角可切换 English。</footer>
+    </div>
+
+    <!-- ================= ENGLISH VERSION ================= -->
+    <div class="wrap" id="wrapEn" lang="en" hidden>
+      <header class="hero">
+        <img src="/guides/warlock-98be658bcaf2.webp" alt="Hooded warlock holding a glowing grimoire, commanding three goatmen and a bound demon knight" />
+        <div class="veil"></div>
+        <div class="htext">
+          <h1>Summon Warlock Leveling Flowchart</h1>
+          <p>Season 16 · Patch 3.4 (item-only patch — no Warlock skill changes, last season's build still works). One line: Goatmen opener → three demons → Bind Demon at 30 → capture a super unique to finish the build.</p>
+          <div class="chips">
+            <span class="chip">Season starts <b>Nov 14, 09:00 (Beijing)</b></span>
+            <span class="chip">Legacy of Terror event <b>Nov 14–20</b></span>
+            <span class="chip">Uber Diablo every <b>6 hours</b> · <b>+100% MF</b> all event</span>
+            <span class="chip">Core maxed <b>Bind Demon / Demon Mastery / Goatman</b></span>
+          </div>
+        </div>
+      </header>
+
+      <nav class="nav"><div class="row">
+        <a href="#flowEn">Overview</a><a href="#calcEn">Level Lookup</a><a href="#phasesEn">Phases</a>
+        <a href="#finalEn">Final Build</a><a href="#runewordsEn">Runewords</a><a href="#farmEn">Farming Map</a><a href="#eventEn">Event &amp; Uber Diablo</a>
+      </div></nav>
+
+      <section id="flowEn">
+        <h2><span class="no">◆</span>Overview Route</h2>
+        <p class="sub">Seven phases, from character creation to farming Uber Diablo. Tap any node to jump to that phase.</p>
+        <div class="flow">
+          <a class="fnode" href="#pe1"><div class="lv">Lv 1–12</div><div class="nm">Goatman Opener</div><div class="ds">Normal A1–A2, Mastery to 5 for the 2nd demon</div></a><div class="farr">→</div>
+          <a class="fnode" href="#pe2"><div class="lv">Lv 13–24</div><div class="nm">Army of Three</div><div class="ds">Mastery to 10 for the 3rd demon, max Goatman</div></a><div class="farr">→</div>
+          <a class="fnode" href="#pe3"><div class="lv">Lv 25–30</div><div class="nm">Spirit + Bind</div><div class="ds">Make Spirit sword, Bind Demon at 30, first regular demon</div></a><div class="farr">→</div>
+          <a class="fnode" href="#pe4"><div class="lv">Lv 31–49</div><div class="nm">Max Bind Demon</div><div class="ds">Clear Nightmare, Bind to 20 unlocks super uniques</div></a><div class="farr">→</div>
+          <a class="fnode" href="#pe5"><div class="lv">Lv 50–65</div><div class="nm">Into Hell</div><div class="ds">Max Mastery, fix resists, farm Mephisto</div></a><div class="farr">→</div>
+          <a class="fnode" href="#pe6"><div class="lv">Lv 66–80</div><div class="nm">Event Sprint</div><div class="ds">Full-map Terror Zones + Cows, farm Uber Diablo</div></a><div class="farr">→</div>
+          <a class="fnode" href="#pe7"><div class="lv">Lv 81+</div><div class="nm">Build Complete</div><div class="ds">Death Mark maxed, CTA off-hand, Horazon / HotO</div></a>
+        </div>
+      </section>
+
+      <section id="calcEn">
+        <h2><span class="no">◆</span>Level Lookup: What Do I Point Now?</h2>
+        <p class="sub">Drag to your current level to see cumulative skills, stat targets, and what to do next. Includes quest skill points (Den of Evil +1, Radament +1, Tyrael +2 per difficulty).</p>
+        <div class="calc">
+          <div class="top">
+            <label for="lvEn">Current level</label>
+            <input type="range" id="lvEn" min="1" max="90" value="30" step="1" />
+            <div class="lvbig"><span id="lvnumEn">30</span> <small>Lv</small></div>
+          </div>
+          <div class="quick" id="quickEn"></div>
+          <div class="calcgrid">
+            <div class="cell"><h4>SKILLS (CUMULATIVE)</h4><p id="c-skill-en"></p></div>
+            <div class="cell"><h4>STAT TARGET</h4><p id="c-stat-en"></p></div>
+            <div class="cell"><h4>DO THIS NOW</h4><p id="c-task-en"></p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="phasesEn">
+        <h2><span class="no">◆</span>Phase-by-Phase Plan</h2>
+        <p class="sub">One rule: <b>secure demon count and Goatman damage first, then save points for Bind Demon's super-unique threshold.</b> Since 3.2, demon count and capture tiers count <b>hard points only</b> — +skills from gear do not count.</p>
+        <div class="tl">
+
+          <article class="phase" id="pe1">
+            <h3><span class="lvtag">Phase 1 · Lv 1–12</span>Goatman Opener</h3>
+            <p class="route">Route: Normal A1 (Den of Evil → rescue Cain in Tristram) → A2 desert. Use an A1 Rogue mercenary for now.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li>Lv1: <span class="sk">Summon Goatman 1</span> — your entire damage output early</li>
+                <li>Lv2–5: <span class="sk">Demon Mastery → 5</span>, 5 hard points unlock the <b>2nd demon</b></li>
+                <li>Lv6: <span class="sk">Death Mark 1</span> — teleports Goatmen onto the target and lowers its defense; the boss-killer button</li>
+                <li>Lv7–11: keep raising Goatman (~7–8), save any surplus for Mastery</li>
+                <li>Lv12: <span class="sk">Tainted Blood 1</span> (pathing toward Bind Demon)</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>Strength: raise to <b>25–35</b> first (light armor, grimoire)</li>
+                <li>Dexterity: <b>none</b>; Energy: <b>none</b> (mana potions carry you)</li>
+                <li>Everything else into <b>Vitality</b> — this rule never changes</li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li>Shop/farm a <b>grimoire with +Goatman / +demon skills</b> (Warlock off-hand) — +1 level is a real power spike</li>
+                <li>Everything else: life, resists, run speed — survive first</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li>First runes: <b>The Countess, Forgotten Tower Cellar Lv5</b> (Black Marsh) — farm Tal (#7) and Ral (#8)</li>
+                <li>XP: Tristram, Tamoe Highland — dense and level-appropriate</li>
+              </ul></div>
+            </div>
+            <div class="key">Checkpoint: <b>2 Goatmen + Death Mark</b>. Stand behind them and watch Andariel die.</div>
+          </article>
+
+          <article class="phase" id="pe2">
+            <h3><span class="lvtag">Phase 2 · Lv 13–24</span>Army of Three, Max Goatman</h3>
+            <p class="route">Route: Normal A3 → A4 → A5. Stealth at 17 makes the run noticeably faster.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li>Lv13–17: <span class="sk">Demon Mastery → 10</span>, 10 hard points unlock the <b>3rd demon</b> — the build's first big milestone</li>
+                <li>Around Lv18, 1 point each in pathing skills: <span class="sk">Defiler 1, Gluttony 1</span> (Bind Demon prerequisites), <span class="sk">Blood Pact 1</span> (summon survivability), <span class="sk">Sigil of Sloth 1</span>, <span class="sk">Blade Warp 1</span> (mobility)</li>
+                <li>Lv19–24: <span class="sk">Summon Goatman → 20 maxed</span> (with quest points, done around Lv24)</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>Strength: up to <b>35–45</b>, enough for Stealth and upcoming gear</li>
+                <li>Everything else Vitality — you should already feel tankier than other casters</li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li><b>Stealth</b> (Lv17): Tal #7 + Eth #5 in 2-socket armor — run speed, FCR, FHR all in one</li>
+                <li>After A5, the quest hands you the <b>Ancient's Pledge</b> rune set (Ral #8 + Ort #9 + Tal #7) — make the shield for resists</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li>XP: Worldstone Keep Baal waves (Normal Baal runs)</li>
+                <li>After clearing, open the <b>Normal Cow Level</b>: pick up a Crystal Sword — it becomes your Spirit next phase</li>
+              </ul></div>
+            </div>
+            <div class="key">Checkpoint: <b>3 maxed Goatmen</b>. They carry Crushing Blow, so bosses melt far faster than you'd expect.</div>
+          </article>
+
+          <article class="phase" id="pe3">
+            <h3><span class="lvtag">Phase 3 · Lv 25–30</span>Spirit Out, Bind Demon Unlocked</h3>
+            <p class="route">Route: Nightmare A1–A2. The Lv25 Spirit sword is the single biggest upgrade of the whole leveling run.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li>Lv25–29: <span class="sk">Death Mark to ~8</span> (the defense-reduction sweet spot), <b>save</b> the rest</li>
+                <li>Lv30: <span class="sk">Bind Demon 1</span> — go capture your first bound demon immediately</li>
+                <li>1 point captures <b>regular demons only</b>: grab a handy melee demon in the A4 River of Flame for now. The Smith Hephasto is a super unique — he needs Bind at 20 hard points (Phase 4). He casts Amplify Damage and is your #1 mid-game target; don't waste a trip at 30</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>Strength: up to about <b>55</b> for the Spirit sword and Nightmare gear</li>
+                <li>Everything else Vitality</li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li><b>Spirit sword</b> (Lv25): Normal Cow Crystal Sword → Larzuk socket quest (guaranteed 4 sockets) → Tal #7 + Thul #10 + Ort #9 + Amn #11</li>
+                <li><b>Lore</b> helm (Lv27): Ort #9 + Sol #12, +1 all skills</li>
+                <li>Switch to an <b>A2 mercenary</b>: Nightmare Offensive (Might aura) buffs the whole army's physical damage; start saving a 4-socket polearm for his Insight</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li>Runes: <b>Nightmare Countess</b> — main source of Sol (#12) and other mid runes; her special drop goes up to Ko (#18)</li>
+                <li>Bases: Nightmare Cows for a 4-socket polearm (or Larzuk / cube socket a plain one)</li>
+              </ul></div>
+            </div>
+            <div class="key">Checkpoint: <b>Spirit sword + 1 bound demon</b>. The bind persists across games, but <b>your death, the demon's death, or a respec</b> breaks it — re-capture when that happens.</div>
+          </article>
+
+          <article class="phase" id="pe4">
+            <h3><span class="lvtag">Phase 4 · Lv 31–49</span>Max Bind Demon — the Core Project</h3>
+            <p class="route">Route: clear Nightmare A3–A5. This phase has one job: feed every point to Bind Demon.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li><span class="sk">Bind Demon → 20 maxed</span> (around Lv49, counting quest points across difficulties)</li>
+                <li>Why hard-max it: capture tiers count hard points only — <b>10 pts: champion-tier, 15 pts: unique, 20 pts: super unique</b></li>
+                <li>Milestones at 5/10/15/20 grant the bound demon bonus affixes: Extra Strong, Extra Fast, Spectral Hit, Aura Enchanted, etc.</li>
+                <li>First job after maxing: go back to the A4 River of Flame and capture <b>Hephasto the Smith</b> (casts Amplify Damage — the whole army benefits). Later targets: super uniques with <b>Fanaticism / Conviction / Might auras</b> (Lister-type packs) — one of those is worth half an army</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>Strength: <b>70–90</b> range, top up as gear demands</li>
+                <li>Everything else Vitality; Nightmare resist penalty is −40, start prioritizing resists on gear</li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li>Mercenary <b>Insight</b> (makeable from Lv27): Ral #8 + Tir #3 + Tal #7 + Sol #12 in a 4-socket polearm — Meditation aura ends the army's mana problems</li>
+                <li>Short on resists? Switch to a <b>Smoke</b> armor: Nef #4 + Lum #17, +50 all resists into Hell</li>
+                <li>Keep shopping +demon-skill grimoires and +skills amulets/rings (Bul-Kathos, Stone of Jordan if they drop)</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li>Gear start: <b>Nightmare Mephisto</b> (A3 Durance of Hate Lv3) — summoners farm him standing still; best value in all of Nightmare</li>
+                <li>XP: Nightmare Baal runs to 45+ before attempting Hell</li>
+              </ul></div>
+            </div>
+            <div class="key">Checkpoint: <b>Bind Demon at 20 hard points</b>. From now on, every super unique you capture is permanent roster (until it dies).</div>
+          </article>
+
+          <article class="phase" id="pe5">
+            <h3><span class="lvtag">Phase 5 · Lv 50–65</span>Into Hell: Max Mastery, Graduate Resists</h3>
+            <p class="route">Route: Hell A1–A3. Hell resist penalty is −100 — check your panel before stepping out.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li><span class="sk">Demon Mastery → 20 maxed</span>: damage, attack speed, AR and move speed for every demon — the bound demon included</li>
+                <li>Surplus points: <span class="sk">Boiling Blood 1+</span> or more Death Mark, to taste</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>The fork: if you plan a <b>Spirit shield</b> (Monarch), push Strength toward <b>156</b>; otherwise stop at gear requirements</li>
+                <li>Everything else Vitality; Hell target: 1000+ life</li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li><b>Spirit shield</b>: 4-socket Monarch (Cows / lvl-85 areas) — a second Spirit, +2 skills in both hands</li>
+                <li>Watch for <b>Horazon set</b> pieces: two pieces already grant +demon skills — the graduation path besides Heart of the Oak</li>
+                <li>The reworked 3.4 <b>Veil of Steel</b> (+2 all skills, physical damage reduction) drops in its new version on Ladder only — keep one if it drops; 192 Strength requirement, a late-game piece</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li><b>Hell Mephisto</b>: the graduation-gear factory — Horazon pieces and skill gear start here</li>
+                <li><b>Hell Countess</b>: special drop up to Lo (#28), and the steadiest mid-rune income for trading up</li>
+                <li>Lvl-85 areas: The Pit, Ancient Tunnels (friendly when no fire immunes), Chaos Sanctuary</li>
+              </ul></div>
+            </div>
+            <div class="key">Checkpoint: <b>two and a half of the three cores maxed</b> (Bind 20 / Mastery 20 / Goatman 20) and able to stand in Hell A5.</div>
+          </article>
+
+          <article class="phase" id="pe6">
+            <h3><span class="lvtag">Phase 6 · Lv 66–80</span>Event Sprint: Terror Zones + Uber Diablo</h3>
+            <p class="route">Route: clear Hell, kill Baal → the Legacy of Terror event fully opens. Efficiency here is more than double the normal rate — eat the event first.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li><span class="sk">Death Mark → 20 maxed</span>: full defense reduction + damage amp; Goatman Crushing Blow scales with it — the key skill for Uber Diablo</li>
+                <li>Then <span class="sk">Blood Pact → ~12</span> for the bound demon's life cap and all resists</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>Hold course: Strength for gear (or 156 for Spirit shield), rest Vitality</li>
+                <li>Don't skip the stat quests in all three difficulties (Lam Esen's Tome +15, Golden Bird +60 life, etc.)</li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li>Save runes for a <b>Call to Arms</b> off-hand (recipe below): Battle Command first, then Battle Orders — whole army's life/mana caps jump</li>
+                <li>Demon-skill <b>grand charms (skillers)</b>, a Warlock <b>Hellfire Torch</b>, and an Annihilus — in that order</li>
+                <li>Mercenary upgrade: Insight → a high-damage weapon + life-leech helm (Andariel's Visage) when affordable</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li>During the event, killing Baal turns <b>every zone in that difficulty into a Terror Zone</b>: rotate Chaos Sanctuary, Worldstone, Cows</li>
+                <li><b>Cow portal stays open</b> during the event (no Wirt's Leg needed): bases and high runes</li>
+                <li><b>Uber Diablo</b>: guaranteed spawn every 6 hours — Crushing Blow Goatmen + Death Mark grind him down for an Annihilus</li>
+              </ul></div>
+            </div>
+            <div class="key">Checkpoint: <b>Hell cleared + first Annihilus in hand</b>. Early-season Annihilus is very valuable on Ladder — even a spare one trades for graduation gear.</div>
+          </article>
+
+          <article class="phase" id="pe7">
+            <h3><span class="lvtag">Phase 7 · Lv 81+</span>Build Complete, Long-Term Farming</h3>
+            <p class="route">Route: Terror Zone rotation + lvl-85 areas + trade for missing pieces. A finished summoner needs near-zero inputs — ideal for relaxed long sessions.</p>
+            <div class="cols">
+              <div><h4>Skills</h4><ul>
+                <li>Remaining points: max out <span class="sk">Gluttony</span> (corpse-eating sustains the whole army) or Boiling Blood, to taste</li>
+                <li>Only one real respec case: switching to a block build / different variant — use Tyrael's respec or a Token of Absolution for a full rebuild</li>
+              </ul></div>
+              <div><h4>Stats</h4><ul>
+                <li>Final: Strength = gear requirement (156 for the Spirit-shield route), Dexterity 0, Energy 0, <b>Vitality maxed</b></li>
+              </ul></div>
+              <div><h4>Gear targets</h4><ul>
+                <li>Main hand, pick one graduation path: <b>Heart of the Oak</b> (flail) or a high-skill grimoire + Horazon set</li>
+                <li>Off-hand locked: <b>Call to Arms + Spirit shield</b> — buff on entry, swap back to main</li>
+                <li><b>Enigma is not a priority</b>: Death Mark already teleports the whole army onto the target. Spend runes on CTA and HotO first</li>
+              </ul></div>
+              <div><h4>Where to farm</h4><ul>
+                <li>Terror Zones (regular rotation): Chaos Sanctuary, Travincal, Cows</li>
+                <li>High runes: Hell Cows, Chaos Sanctuary, Countess — one loop, three stops</li>
+              </ul></div>
+            </div>
+            <div class="key">Final loop: <b>summon 3 Goatmen + your captured bound demon → Death Mark the target → stand back and pick up loot</b>. Buff order is always CTA Battle Command first, Battle Orders second.</div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="finalEn">
+        <h2><span class="no">◆</span>Final Build — Hard Points</h2>
+        <p class="sub">About 100 points total (including 12 quest points across difficulties; complete around Lv88). Leftover points keep feeding Gluttony.</p>
+        <div class="final">
+          <div class="f"><span class="pts">20</span><b>Bind Demon</b><p>Super-unique capture threshold — hard points only, must max</p></div>
+          <div class="f"><span class="pts">20</span><b>Demon Mastery</b><p>10 pts unlock the 3rd demon; maxed = army-wide damage / attack speed</p></div>
+          <div class="f"><span class="pts">20</span><b>Summon Goatman</b><p>Early-game carry + late-game Crushing Blow boss killer</p></div>
+          <div class="f"><span class="pts">20</span><b>Death Mark</b><p>Teleports the army + defense cut + damage amp; calls the kill</p></div>
+          <div class="f"><span class="pts">~12</span><b>Blood Pact</b><p>Bound demon's life cap and all resists</p></div>
+          <div class="f"><span class="pts">1</span><b>Tainted Blood / Defiler</b><p>Pathing points toward Bind Demon</p></div>
+          <div class="f"><span class="pts">1</span><b>Gluttony</b><p>Pathing (extra points later: corpse-eating sustain)</p></div>
+          <div class="f"><span class="pts">1</span><b>Boiling Blood</b><p>Pathing; blood-line summon damage buff</p></div>
+          <div class="f"><span class="pts">1</span><b>Sigil of Sloth</b><p>Stacks with Death Mark as a second debuff</p></div>
+          <div class="f"><span class="pts">1</span><b>Blade Warp</b><p>Hellcraft mobility — repositioning / escape</p></div>
+        </div>
+        <div class="note" data-guide-layout="guide-layout-1"><b>Final stats:</b> Strength = gear requirement (Stealth era 35 → Spirit sword 55 → up to 156 for the Spirit-shield route); Dexterity 0; Energy 0 (merc Insight covers mana); <b>everything else Vitality</b>.</div>
+      </section>
+
+      <section id="runewordsEn">
+        <h2><span class="no">◆</span>Key Runewords (in order of appearance)</h2>
+        <p class="sub">Runes are labeled with their numbers. The base must be a <b>plain (grey-text) item with exactly the right socket count</b> — magic items with sockets cannot make runewords, and one rune out of order ruins it.</p>
+        <div class="grid">
+          <div class="rw"><h3>Stealth <span class="en">Lv 17 · 2-socket armor</span></h3>
+            <div class="runes"><span class="rune">Tal<small>#7</small></span><span class="plus">+</span><span class="rune">Eth<small>#5</small></span></div>
+            <p>Run speed + FCR + FHR. Your first real item — wear it into Nightmare.</p>
+            <p class="where">Get it: farm Tal/Eth from <b>the Countess</b>, buy a 2-socket light armor in A2</p></div>
+          <div class="rw"><h3>Spirit <span class="en">Lv 25 · 4-socket sword / shield</span></h3>
+            <div class="runes"><span class="rune">Tal<small>#7</small></span><span class="plus">+</span><span class="rune">Thul<small>#10</small></span><span class="plus">+</span><span class="rune">Ort<small>#9</small></span><span class="plus">+</span><span class="rune">Amn<small>#11</small></span></div>
+            <p>+2 all skills, big FCR, huge mana. Sword first; Monarch shield version in Hell — +2 in both hands.</p>
+            <p class="where">Get it: Normal Cow Crystal Sword → <b>Larzuk sockets</b> (guaranteed 4); runes from the Countess</p></div>
+          <div class="rw"><h3>Lore <span class="en">Lv 27 · 2-socket helm</span></h3>
+            <div class="runes"><span class="rune">Ort<small>#9</small></span><span class="plus">+</span><span class="rune">Sol<small>#12</small></span></div>
+            <p>The cheapest +1 skills helm, with lightning resist and mana per kill. Wear until a skill helm / Horazon drops.</p>
+            <p class="where">Get it: Sol mainly from <b>Nightmare Countess</b></p></div>
+          <div class="rw"><h3>Insight <span class="en">Lv 27 · 4-socket polearm (merc)</span></h3>
+            <div class="runes"><span class="rune">Ral<small>#8</small></span><span class="plus">+</span><span class="rune">Tir<small>#3</small></span><span class="plus">+</span><span class="rune">Tal<small>#7</small></span><span class="plus">+</span><span class="rune">Sol<small>#12</small></span></div>
+            <p>For the A2 merc: Meditation aura refills everyone's mana — summoners stop drinking blue potions. Make two, keep one for a better base.</p>
+            <p class="where">Get it: 4-socket polearm from Nightmare Cows / road drops, or Larzuk</p></div>
+          <div class="rw"><h3>Ancient's Pledge <span class="en">Lv 21 · 3-socket shield</span></h3>
+            <div class="runes"><span class="rune">Ral<small>#8</small></span><span class="plus">+</span><span class="rune">Ort<small>#9</small></span><span class="plus">+</span><span class="rune">Tal<small>#7</small></span></div>
+            <p>Big all-resist shield — the rescue item when Hell resists fall apart at the door.</p>
+            <p class="where">Get it: the rune set is handed to you directly by the <b>A5 quest “Rescue on Mount Arreat”</b> (Qual-Kehk gives Ral + Ort + Tal)</p></div>
+          <div class="rw"><h3>Smoke <span class="en">Lv 37 · 2-socket armor</span></h3>
+            <div class="runes"><span class="rune">Nef<small>#4</small></span><span class="plus">+</span><span class="rune">Lum<small>#17</small></span></div>
+            <p>+50 all resists. The steadiest pre-Hell transition armor — swap from Stealth when Stealth can't keep you alive.</p>
+            <p class="where">Get it: Lum from <b>Nightmare Countess</b> (inside her special drop range)</p></div>
+          <div class="rw"><h3>Call to Arms <span class="en">Lv 51 · 5-socket weapon (off-hand)</span></h3>
+            <div class="runes"><span class="rune">Amn<small>#11</small></span><span class="plus">+</span><span class="rune">Ral<small>#8</small></span><span class="plus">+</span><span class="rune">Mal<small>#23</small></span><span class="plus">+</span><span class="rune">Ist<small>#24</small></span><span class="plus">+</span><span class="rune">Ohm<small>#27</small></span></div>
+            <p>Off-hand warcries: <b>Battle Command first (all skills +1), then Battle Orders (life/mana/stamina caps)</b> — order matters. Judged by its Battle Orders roll; +6 is the expensive one.</p>
+            <p class="where">Get it: Ohm from Hell Cows / Chaos Sanctuary or trade; Crystal Sword base keeps it simple</p></div>
+          <div class="rw"><h3>Heart of the Oak <span class="en">Lv 55 · 4-socket flail</span></h3>
+            <div class="runes"><span class="rune">Ko<small>#18</small></span><span class="plus">+</span><span class="rune">Vex<small>#26</small></span><span class="plus">+</span><span class="rune">Pul<small>#21</small></span><span class="plus">+</span><span class="rune">Thul<small>#10</small></span></div>
+            <p>+3 all skills, 40 FCR, +40 all resists. One of the two graduation main-hands — pick this or the Horazon set route, not both.</p>
+            <p class="where">Get it: Vex from Hell Cows / Terror Zones, or cube up / trade</p></div>
+          <div class="rw"><h3>Fortitude <span class="en">Lv 59 · 4-socket armor (merc)</span></h3>
+            <div class="runes"><span class="rune">El<small>#1</small></span><span class="plus">+</span><span class="rune">Sol<small>#12</small></span><span class="plus">+</span><span class="rune">Dol<small>#14</small></span><span class="plus">+</span><span class="rune">Lo<small>#28</small></span></div>
+            <p>Mercenary graduation armor: 300% enhanced damage. Lo (#28) is the priciest tile on this page — dress the merc first; Smoke / Horazon can cover you meanwhile.</p>
+            <p class="where">Get it: Lo at the top of Hell Countess's special drop, Cows, or trade</p></div>
+        </div>
+      </section>
+
+      <section id="farmEn">
+        <h2><span class="no">◆</span>Farming Map: What You Want, Where to Get It</h2>
+        <p class="sub">Look it up by target. Countess = rune foundation, Mephisto = gear foundation, Cows = bases and high runes.</p>
+        <table>
+          <thead><tr><th>Target</th><th>Location</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-h="Target"><b>Low runes</b> (Tal 7 / Ral 8 / Ort 9 / Thul 10 / Amn 11)</td><td data-h="Location">Forgotten Tower Cellar Lv5 · Countess (Normal / Nightmare)</td><td data-h="Notes">Normal special drop caps at Ral (#8); Nightmare reaches Ko (#18). Farm her repeatedly early — Spirit / Stealth / Lore all come from her</td></tr>
+            <tr><td data-h="Target"><b>Mid–high runes</b> (Mal 23 / Ist 24 / Ohm 27 / Lo 28)</td><td data-h="Location">Hell Countess + Hell Cows + Chaos Sanctuary</td><td data-h="Notes">Countess special drop caps at Lo (#28) and wins on consistency; Ohm and up mostly come from Cow / Chaos volume</td></tr>
+            <tr><td data-h="Target"><b>Spirit sword base</b> (Crystal Sword)</td><td data-h="Location">Normal Cow Level</td><td data-h="Notes">A Crystal Sword from Normal Cows always gets 4 sockets from Larzuk — the most reliable Spirit base in the game</td></tr>
+            <tr><td data-h="Target"><b>Insight base</b> (4-socket polearm)</td><td data-h="Location">Nightmare Cows / Nightmare road drops</td><td data-h="Notes">Prefer high-damage bases (Colossus Voulge, Thresher…); socket plain ones with Larzuk or the cube recipe</td></tr>
+            <tr><td data-h="Target"><b>Spirit shield base</b> (Monarch)</td><td data-h="Location">Hell Cows, lvl-85 areas, Terror Zones</td><td data-h="Notes">Only the Monarch reaches 4 sockets (non-Paladin) — 156 Strength required, decide your stats before you build it</td></tr>
+            <tr><td data-h="Target"><b>+skill grimoires / Horazon set</b></td><td data-h="Location">Nightmare → Hell Mephisto, Hell Terror Zones</td><td data-h="Notes">Check every grimoire drop for +demon-skill affixes; Horazon pieces mainly come from Hell Mephisto and trading</td></tr>
+            <tr><td data-h="Target"><b>Skillers / Torch / Annihilus</b></td><td data-h="Location">Hell lvl-85 areas (skillers) · Uber Tristram (Torch) · Uber Diablo event (Annihilus)</td><td data-h="Notes">Demon-skill grand charms from lvl-85 elites; the Torch needs keys and the 6-uber fight — a late goal</td></tr>
+            <tr><td data-h="Target"><b>Bind Demon prey</b></td><td data-h="Location">A4 River of Flame · A5 Worldstone</td><td data-h="Notes">Lv30: capture a regular demon to get by. At 20 hard points: Hephasto (Amplify Damage) and super uniques with Fanaticism / Conviction / Might auras (Lister type)</td></tr>
+            <tr><td data-h="Target"><b>XP</b></td><td data-h="Location">Normal / Nightmare Baal runs → Hell Terror Zones</td><td data-h="Notes">Summoners clear Baal waves very safely; after Hell, Terror Zones give XP and drops together</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="eventEn">
+        <h2><span class="no">◆</span>Event Week: Legacy of Terror (Nov 14, 09:00 – Nov 20, 09:00 Beijing)</h2>
+        <p class="sub">Hell Uber Diablo (Diablo Clone) spawns on a guaranteed 6-hour cycle, +100% MF throughout; killing Baal at any difficulty turns every zone of that difficulty into a Terror Zone; the Cow portal stays open. Ladder and non-Ladder both.</p>
+        <div class="cols" data-guide-layout="guide-layout-2">
+          <div class="note"><b>Uber Diablo slots (Beijing time, daily cycle):</b>
+            <div class="times"><span>03:00</span><span>09:00</span><span>15:00</span><span>21:00</span></div>
+            Enter a Hell game a few minutes early and wait for the spawn — no more watching for Stone of Jordan sale messages. Summoner fight: 3 Goatmen + bound demon swarm him, Death Mark calls the target, Crushing Blow does the grinding. Drops the Annihilus small charm.
+          </div>
+          <div class="note"><b>Catching up when you're back on the 15th (you only miss the first 4 slots — about 20 remain):</b><br />
+            ① Start with your <b>non-Ladder graduated Warlock</b> (Heart of the Oak and Horazon are already on him) — farm Uber Diablo and full-map Terror Zones immediately and eat the richest part of the event first;<br />
+            ② Level the Ladder character in the evenings at your own pace, following this page — reaching Hell lines up with the later Uber Diablo slots;<br />
+            ③ Shops and gambling are 15% off during the event — gamble amulets and rings on the side.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <p class="src">Build &amp; mechanics references:
+          <a href="https://www.icy-veins.com/d2/demon-warlock-build-skills" target="_blank" rel="noopener">Icy Veins · Demon Warlock skill build</a> ·
+          <a href="https://www.mmogah.com/news/diablo-2/d2r-season-16-starter-gear-guide-budget-runewords-upgrades" target="_blank" rel="noopener">Season 16 starter gear &amp; budget runewords guide</a> ·
+          <a href="https://www.diablobytes.com/d2-resurrected/guides/warlock-guide/" target="_blank" rel="noopener">Warlock class mechanics overview (3.2/3.3 changes)</a>
+        </p>
+      </section>
+
+      <footer>Summon Warlock Leveling Flowchart · Season 16 / Patch 3.4 · Mechanics follow the hard-point rules in place since 3.2 (demon count: 5 pts → 2 demons, 10 pts → 3; Bind Demon capture tiers at 10 / 15 / 20 hard points). Rune numbers are the standard numbering. This page is the Black Fur Radar leveling subpage — switch back to 中文 at the top.</footer>
+    </div>
+
+
+
+  <script src="/guides/summon-warlock.js" defer></script>
+  </body>
+</html>

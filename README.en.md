@@ -8,6 +8,36 @@ A Cloudflare Worker that checks Diablo II: Resurrected DClone progress every min
 - Each observed stage at or above the threshold is announced once per cycle. A newer stage 1 report starts a new cycle.
 - Settings, deduplication records, and pending notifications persist in a SQLite Durable Object.
 - Notifications continue while the browser is closed. Failed pushes are retried with backoff.
+- The public Summon Warlock leveling guide is available from the homepage's **Leveling guide ↗** navigation link and its guide card. It includes the supplied Season 16 guide in Chinese and English, a level-based skill lookup, gearing and farming routes.
+
+## Latest update — November 12, 2026
+
+- Added a standalone bilingual Summon Warlock leveling guide and two homepage entry points.
+- Shared language preference with the radar, added direct language links, and preserved the selected level when switching languages.
+- Extracted scripts, styles and a deduplicated illustration into same-origin assets compatible with the strict Content Security Policy. No external fonts are required.
+- Disabled HTML caching and versioned homepage asset references to reduce stale pages and mixed asset versions after updates.
+
+See [CHANGELOG.md](CHANGELOG.md) for the full change and verification notes.
+
+## Summon Warlock leveling guide
+
+Append these paths to your own deployed site URL:
+
+| View | Path |
+| --- | --- |
+| Saved browser language | `/guides/summon-warlock` |
+| Chinese | `/guides/summon-warlock?lang=zh-CN` |
+| English | `/guides/summon-warlock?lang=en` |
+
+The guide covers the overview route, skills by level, progression phases, final skill allocation, runewords, farming locations and the supplied Season 16 event notes. Use the top bar to change language or return to the radar. The level slider and quick-level buttons are interactive; switching languages retains the selected level, and the browser remembers language across visits.
+
+The generated files in `public/guides/` are ready to deploy; the original HTML is not required and is not included in this update. To regenerate the page from a revised source, place one source HTML guide in the project root and run:
+
+```sh
+python scripts/import-warlock-guide.py
+```
+
+The importer preserves the source and writes the bilingual page, scripts, styles and shared illustration into `public/guides/`. Mechanics and event times are reproduced from the supplied document without independent verification and are not automatically updated for future patches.
 
 ## Data source
 
@@ -73,3 +103,5 @@ For local development, set these secrets in `.dev.vars` and run `npm run dev`. T
 `.dev.vars`, `.env` files, personal Wrangler configuration, local credential files, runtime state, logs, browser profiles, and screenshots are Git-ignored. The committed `.dev.vars.example` contains placeholders only. Keep actual passwords and tokens in local files or Cloudflare Secrets.
 
 `npm test` covers notification cycles, deduplication, source parsing, snapshot freshness, retries, persistence, authentication, and the WeChat protocol. With Chrome or Edge installed, `node scripts/ui-check.mjs` verifies the public dashboard, admin settings, both languages, persisted language choice, and mobile layout using local fixtures. It sends no real push messages.
+
+Browser verification also covers the guide navigation link, both guide languages, language persistence, level lookup, retaining the level when switching languages, the return link, illustration loading and strict CSP compatibility.

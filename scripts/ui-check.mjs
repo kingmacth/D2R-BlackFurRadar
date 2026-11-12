@@ -18,6 +18,8 @@ for (const candidate of [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrom
 }
 if (!browser) throw new Error('Set CHROME_PATH to an installed Chrome/Edge executable');
 const server = createServer(async (req,res) => {
+  const pathname=new URL(req.url,'http://localhost').pathname;
+  res.setHeader('content-security-policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
   if(req.url.startsWith('/api/')) {
     if(req.url !== '/api/public' && req.headers.authorization !== 'Bearer test-password') {res.writeHead(401,{'content-type':'application/json'});res.end(JSON.stringify({error:'管理密码不正确'}));return;}
     if(req.url === '/api/settings') {
@@ -26,9 +28,9 @@ const server = createServer(async (req,res) => {
     }
     res.writeHead(200,{'content-type':'application/json'});res.end(JSON.stringify(state));return;
   }
-  const file = req.url === '/' ? 'index.html' : req.url.slice(1);
-  if(!['index.html','app.js','i18n.js','style.css'].includes(file)) {res.writeHead(404);res.end();return;}
-  res.setHeader('content-type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html; charset=utf-8');
+  const file = pathname === '/' ? 'index.html' : pathname === '/guides/summon-warlock' ? 'guides/summon-warlock.html' : pathname.slice(1);
+  if(!['index.html','app.js','i18n.js','style.css'].includes(file) && !/^guides\/(summon-warlock\.(html|js|css)|warlock-[a-f0-9]{12}\.webp)$/.test(file)) {res.writeHead(404);res.end();return;}
+  res.setHeader('content-type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.webp')?'image/webp':'text/html; charset=utf-8');
   res.end(await readFile(new URL(`../public/${file}`,import.meta.url)));
 });
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
@@ -45,12 +47,14 @@ try {
   if(!targets) throw new Error('Browser did not start');
   ws=new WebSocket(targets.find(x=>x.type==='page').webSocketDebuggerUrl);
   await new Promise((r,j)=>{ws.onopen=r;ws.onerror=j;});
-  let seq=0;const waiting=new Map();
-  ws.onmessage=({data})=>{const m=JSON.parse(data);if(m.id){const h=waiting.get(m.id);waiting.delete(m.id);m.error?h.reject(new Error(m.error.message)):h.resolve(m.result);}};
+  let seq=0;const waiting=new Map();const pageErrors=[];
+  ws.onmessage=({data})=>{const m=JSON.parse(data);if(m.method==='Runtime.exceptionThrown')pageErrors.push(m.params.exceptionDetails.text);if(m.method==='Log.entryAdded' && /Content Security Policy|Refused to execute|Refused to apply/i.test(m.params.entry.text))pageErrors.push(m.params.entry.text);if(m.id){const h=waiting.get(m.id);waiting.delete(m.id);m.error?h.reject(new Error(m.error.message)):h.resolve(m.result);}};
   const command=(method,params={})=>new Promise((resolve,reject)=>{const id=++seq;waiting.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}));});
   const evaluate=async expression=>{const r=await command('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails) throw new Error(r.exceptionDetails.text);return r.result.value;};
   async function until(expression) {for(let i=0;i<100;i++){if(await evaluate(expression))return;await delay(50);}throw new Error(`UI condition timed out: ${expression}`);}
   await command('Page.enable');
+  await command('Runtime.enable');
+  await command('Log.enable');
   await command('Emulation.setDeviceMetricsOverride',{width:1440,height:1200,deviceScaleFactor:1,mobile:false});
   await command('Page.navigate',{url:`http://127.0.0.1:${port}`});
   await until(`document.getElementById('login-form') !== null && document.readyState === 'complete'`);
@@ -58,6 +62,8 @@ try {
   assert.equal(await evaluate(`document.getElementById('login').hidden`),true);
   assert.equal(await evaluate(`document.getElementById('settings-panel').hidden`),true);
   assert.equal(await evaluate(`document.getElementById('check').hidden`),true);
+  assert.equal(await evaluate(`document.getElementById('guide-nav').getBoundingClientRect().height>0`),true);
+  assert.equal(await evaluate(`document.getElementById('guide-nav').textContent`),'开荒指南 ↗');
   await mkdir('artifacts',{recursive:true});
   let screenshot=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
   await writeFile('artifacts/public.png',Buffer.from(screenshot.data,'base64'));
@@ -66,6 +72,7 @@ try {
   assert.equal(await evaluate(`document.getElementById('radar-status').textContent`),'Monitoring');
   assert.equal(await evaluate(`document.querySelector('.stage-message').textContent`),'Terror spreads across Sanctuary.');
   assert.equal(await evaluate(`document.getElementById('manage').textContent`),'Manage alerts');
+  assert.equal(await evaluate(`document.getElementById('guide-nav').textContent`),'Leveling guide ↗');
   assert.equal(await evaluate(`(()=>{const body=document.body.cloneNode(true);body.querySelectorAll('select').forEach(e=>e.remove());return /[\u3400-\u9fff]/u.test(body.textContent)})()`),false);
   await command('Page.reload');
   await until(`document.querySelectorAll('.progress-card').length===1`);
@@ -102,7 +109,33 @@ try {
   await evaluate(`document.getElementById('logout').click()`);
   assert.equal(await evaluate(`document.getElementById('dashboard').hidden`),false);
   assert.equal(await evaluate(`document.getElementById('settings-panel').hidden`),true);
-  console.log('Browser QA passed: public progress, login, settings, Chinese/English, English stage text, no untranslated Chinese, persisted language after reload, unsaved settings preserved, desktop/mobile layouts, logout.');
+  assert.equal(await evaluate(`document.getElementById('warlock-guide').textContent.includes('Summon Warlock')`),true);
+  await evaluate(`document.getElementById('guide-nav').click()`);
+  await until(`!!document.getElementById('wrapEn') && document.getElementById('wrapEn').hidden===false`);
+  assert.equal(await evaluate(`document.documentElement.lang`),'en');
+  await until(`document.querySelector('#wrapEn .hero img').complete && document.querySelector('#wrapEn .hero img').naturalWidth>0`);
+  await evaluate(`document.querySelector('#quickEn button[data-m="30"]').click()`);
+  assert.equal(await evaluate(`document.getElementById('c-skill-en').textContent.includes('Bind Demon 1')`),true);
+  await evaluate(`document.getElementById('btn-zh').click()`);
+  assert.equal(await evaluate(`document.getElementById('wrapZh').hidden`),false);
+  assert.equal(await evaluate(`document.getElementById('lv').value`),'30');
+  assert.equal(await evaluate(`document.getElementById('c-skill').textContent.includes('束缚恶魔 1')`),true);
+  assert.equal(await evaluate(`document.documentElement.scrollWidth<=innerWidth`),true);
+  const guideShot=async name=>{const r=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await writeFile(`artifacts/${name}.png`,Buffer.from(r.data,'base64'));};
+  await guideShot('guide-zh-mobile');
+  await evaluate(`document.querySelector('#quick button[data-m="60"]').click();document.getElementById('btn-en').click()`);
+  assert.equal(await evaluate(`document.getElementById('lvEn').value`),'60');
+  assert.equal(await evaluate(`document.getElementById('c-skill-en').textContent.includes('Demon Mastery')`),true);
+  assert.equal(await evaluate(`[...document.querySelectorAll('#wrapEn a[href^="#"]')].every(a=>document.getElementById(a.hash.slice(1)))`),true);
+  await command('Page.reload');
+  await until(`!!document.getElementById('wrapEn') && !document.getElementById('wrapEn').hidden`);
+  assert.equal(await evaluate(`document.documentElement.lang`),'en');
+  await command('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+  await guideShot('guide-en-desktop');
+  await evaluate(`document.getElementById('radar-home').click()`);
+  await until(`!!document.getElementById('language') && document.getElementById('language').value==='en'`);
+  assert.deepEqual(pageErrors,[]);
+  console.log('Browser QA passed: public dashboard, protected settings, bilingual UI, language persistence, guide entry/back link, both guide languages, level calculator, shared level on language switch, local images, mobile layout and strict CSP.');
 } finally {
   if(ws?.readyState===1)ws.close();
   child.kill();
