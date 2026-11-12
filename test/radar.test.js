@@ -4,6 +4,15 @@ import { initialState as defaultState, normalizeRows, observe, pendingEvents, va
 import worker, { RadarState, sendWechat } from '../src/worker.js';
 import { normalizeD2Emu, querySource, sourceInfo } from '../src/sources.js';
 
+test('legacy guide links preserve their language and resolve to the S16 edition',async()=>{
+  for(const name of ['summon-warlock','echo-demon']){
+    const response=await worker.fetch(new Request(`https://example.com/guides/${name}?lang=en`),{});
+    assert.equal(response.status,308);
+    assert.equal(response.headers.get('location'),`https://example.com/guides/s16/${name}?lang=en`);
+    assert.equal(response.headers.get('cache-control'),'no-store');
+  }
+});
+
 const now = 1792200000000;
 // Most existing transition fixtures exercise LoD; production defaults to RotW.
 const initialState = () => { const state=defaultState(); state.settings.versions=[1]; return state; };

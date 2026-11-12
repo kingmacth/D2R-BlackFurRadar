@@ -152,14 +152,18 @@ $('test-push').addEventListener('click', e => action(e.currentTarget, async () =
 }));
 $('language').addEventListener('change', e => {
   setLanguage(e.target.value);
-  $('warlock-guide').href = `/guides/summon-warlock?lang=${e.target.value}`;
+  $('warlock-guide').href = `/guides/s16/summon-warlock?lang=${e.target.value}`;
   $('guide-nav').href = $('warlock-guide').href;
+  $('echo-guide').href = `/guides/s16/echo-demon?lang=${e.target.value}`;
+  $('echo-nav').href = $('echo-guide').href;
   $('feedback').hidden = true;
   if (current) render(current);
 });
 applyLanguage();
-$('warlock-guide').href = `/guides/summon-warlock?lang=${document.documentElement.lang}`;
+$('warlock-guide').href = `/guides/s16/summon-warlock?lang=${document.documentElement.lang}`;
 $('guide-nav').href = $('warlock-guide').href;
+$('echo-guide').href = `/guides/s16/echo-demon?lang=${document.documentElement.lang}`;
+$('echo-nav').href = $('echo-guide').href;
 refresh().catch(e => notify(e.message, true));
 setInterval(() => { if (!document.hidden) refresh().catch(() => {}); }, 30000);
-import { t, formatDate as date, translateMessage, applyLanguage, setLanguage } from './i18n.js?v=20261112-guide-nav';
+import { t, formatDate as date, translateMessage, applyLanguage, setLanguage } from './i18n.js?v=20261112-s16-builds';

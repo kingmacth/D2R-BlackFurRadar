@@ -8,10 +8,12 @@ A Cloudflare Worker that checks Diablo II: Resurrected DClone progress every min
 - Each observed stage at or above the threshold is announced once per cycle. A newer stage 1 report starts a new cycle.
 - Settings, deduplication records, and pending notifications persist in a SQLite Durable Object.
 - Notifications continue while the browser is closed. Failed pushes are retried with backoff.
-- The public Summon Warlock leveling guide is available from the homepage's **Leveling guide ↗** navigation link and its guide card. It includes the supplied Season 16 guide in Chinese and English, a level-based skill lookup, gearing and farming routes.
+- Two separate **S16** builds are available from independent homepage navigation links and cards: **Fast Leveling · Echoing Strike & Demons**, prominently featured first, and **Pure Summoner**. Their content and calculators are not merged.
 
 ## Latest update — November 12, 2026
 
+- Added a separate fast-leveling Echoing Strike & Demons guide, complete English translation, and level 1–65 lookup.
+- Explicitly labeled both guides S16 and archived their assets under `/guides/s16/`. Future seasons should use separate directories rather than overwriting S16.
 - Added a standalone bilingual Summon Warlock leveling guide and two homepage entry points.
 - Shared language preference with the radar, added direct language links, and preserved the selected level when switching languages.
 - Extracted scripts, styles and a deduplicated illustration into same-origin assets compatible with the strict Content Security Policy. No external fonts are required.
@@ -19,25 +21,34 @@ A Cloudflare Worker that checks Diablo II: Resurrected DClone progress every min
 
 See [CHANGELOG.md](CHANGELOG.md) for the full change and verification notes.
 
-## Summon Warlock leveling guide
+## Separate S16 build guides
+
+| Separate build | Season | Focus |
+| --- | --- | --- |
+| Echoing Strike & Demons | **S16** | **Fast leveling**, featured first on the homepage; player damage with demon blockers and a level 1–65 lookup |
+| Pure Summoner | **S16** | Summon-led damage, with its own skill, gear and farming progression |
 
 Append these paths to your own deployed site URL:
 
-| View | Path |
-| --- | --- |
-| Saved browser language | `/guides/summon-warlock` |
-| Chinese | `/guides/summon-warlock?lang=zh-CN` |
-| English | `/guides/summon-warlock?lang=en` |
+| Guide | Chinese path | English path |
+| --- | --- | --- |
+| S16 Echoing Strike & Demons · Fast leveling | `/guides/s16/echo-demon?lang=zh-CN` | `/guides/s16/echo-demon?lang=en` |
+| S16 Pure Summoner | `/guides/s16/summon-warlock?lang=zh-CN` | `/guides/s16/summon-warlock?lang=en` |
 
-The guide covers the overview route, skills by level, progression phases, final skill allocation, runewords, farming locations and the supplied Season 16 event notes. Use the top bar to change language or return to the radar. The level slider and quick-level buttons are interactive; switching languages retains the selected level, and the browser remembers language across visits.
+Omit `lang` to use the saved browser preference; the first visit defaults to Chinese.
 
-The generated files in `public/guides/` are ready to deploy; the original HTML is not required and is not included in this update. To regenerate the page from a revised source, place one source HTML guide in the project root and run:
+These are different builds, not one combined guide. The Echo build covers fast progression, five leveling stages, a level 1–65 lookup, weapons and defenses. The Pure Summoner page retains its own skill allocation, gear and farming routes. Use each page's top bar to switch language or return to the radar. Language switches retain the selected level; language preference persists across visits.
+
+Legacy `/guides/summon-warlock` and `/guides/echo-demon` links preserve their language parameters and redirect to the corresponding S16 edition. Skills, gear and event notes are season-specific. Add separate pages and resources for later seasons while retaining the S16 archive.
+
+The generated files in `public/guides/s16/` are ready to deploy; original HTML files are not required. To regenerate a guide, place its original source in the project root and run the corresponding importer:
 
 ```sh
 python scripts/import-warlock-guide.py
+python scripts/import-echo-guide.py
 ```
 
-The importer preserves the source and writes the bilingual page, scripts, styles and shared illustration into `public/guides/`. Mechanics and event times are reproduced from the supplied document without independent verification and are not automatically updated for future patches.
+The importers read the original Summon Warlock and Echo build HTML files respectively, preserving both sources. Echo English text is maintained in `public/guides/s16/echo-demon.i18n.json`; the importer checks static translation coverage. Output pages, scripts, styles and illustrations go into `public/guides/s16/`. Supplied mechanics and event claims have not been comprehensively verified and are not automatically updated for future patches.
 
 ## Data source
 

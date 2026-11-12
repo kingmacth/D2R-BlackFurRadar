@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>S16 · 高速开荒回响恶魔流</title>
+
+
+
+<link rel="stylesheet" href="/guides/s16/echo-demon.css" />
+</head>
+<body>
+<div class="sitebar"><div class="sitebar-inner"><a href="/" id="echo-home">← 黑毛雷达</a><div class="sitebar-controls"><span class="season-tag">S16 · 第16赛季</span><label for="guide-language">显示语言</label><select id="guide-language"><option value="zh-CN">中文</option><option value="en">English</option></select></div></div></div>
+<div class="wrap"><p class="season-note" id="season-note"></p>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <figure>
+      <img src="/guides/s16/echo-c2f28d260eb6.webp" alt="术士悬浮一把回响残影环绕的双手大剑，三只羊头恶魔持盾在他身前结成盾墙" width="1920" height="1280" />
+      <figcaption>回响恶魔流 · 概念插画</figcaption>
+    </figure>
+    <div class="hero-head">
+      <span class="kicker">暗黑破坏神 II：重制版 · 术士开荒</span>
+      <h1>高速开荒回响恶魔流</h1>
+      <p class="lede">输出靠你自己，恶魔只当半堵墙。悬浮一把高伤双手武器，<strong>回响打击打单体、镜影锋刃清群</strong>，恶魔精通只点到 10 解锁三只恶魔挡线，再用血誓分摊伤害——绕开纯招前期只有一只羊头人、伤害跟不上的最弱阶段。<strong>噩梦通关后洗回纯招</strong>，无缝接上地狱终局。</p>
+      <div class="hero-stats">
+        <div class="stat"><b>1 – 65 级</b><span>本路线覆盖区间，进地狱前完成洗点</span></div>
+        <div class="stat"><b>眼光长柄</b><span>核心武器：自己拿，冥思光环解决蓝耗</span></div>
+        <div class="stat"><b>噩梦巴尔后</b><span>洗点时机：用噩梦阿卡拉转纯招</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= WHY ================= -->
+  <section aria-labelledby="why-h">
+    <div class="sec-head"><span class="no">壹</span><h2 id="why-h">为什么前期选回响，不选纯招</h2></div>
+    <div class="vs">
+      <div class="col win">
+        <h3>回响恶魔流 <span class="tag tag-fast">前期快</span></h3>
+        <ul>
+          <li>输出吃<strong>武器面板伤害</strong>：捡到一把高伤双手武器就立刻起飞，不等任何解锁</li>
+          <li>镜影锋刃自带范围清群，推图节奏不断档</li>
+          <li>恶魔照样带满 3 只，但只负责挡线和分摊伤害，不指望它们打输出</li>
+          <li>代价：贴脸输出，操作量比纯招大；地狱后段生存压力上来——正好那时洗点</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>纯召唤流 <span class="tag tag-slow">前期慢</span></h3>
+        <ul>
+          <li>恶魔精通硬点到 5 之前<strong>只有 1 只羊头人</strong>，能抗但伤害很低，你在后面干看着</li>
+          <li>精通 10 点三只齐、30 级点出束缚恶魔之后才算成型</li>
+          <li>前期等于一直在还「解锁的债」，推图速度被拖住</li>
+          <li>但成型后到地狱和终局更稳、更省操作——所以留到洗点后再玩</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" data-echo-layout="echo-layout-1">
+      <p class="t">一句话路线</p>
+      <p>回响速推普通 + 噩梦 → 约 60–65 级杀完噩梦巴尔 → 用噩梦的阿卡拉洗点转纯招 → 地狱和终局交给召唤物。普通、地狱的两次免费洗点留着别动。</p>
+    </div>
+  </section>
+
+  <!-- ================= FLOW ================= -->
+  <section aria-labelledby="flow-h">
+    <div class="sec-head"><span class="no">贰</span><h2 id="flow-h">路线总览</h2></div>
+    <p class="sec-sub">点任意阶段跳到细则。恶魔数量只看恶魔精通的<strong>硬点</strong>：5 点第 2 只、10 点第 3 只，装备加的技能不算。</p>
+    <nav class="flow" aria-label="阶段导航">
+      <a href="#stage1"><span class="lv">1–11</span><span class="nm">悬浮起手<br />回响主升</span></a>
+      <a href="#stage2"><span class="lv">12–17</span><span class="nm">精通 5 点<br />第 2 只恶魔</span></a>
+      <a href="#stage3"><span class="lv">18–29</span><span class="nm">精通 10 点<br />三只齐 · 镜影</span></a>
+      <a href="#stage4"><span class="lv">30–45</span><span class="nm">束缚恶魔 1 点<br />镜影点满</span></a>
+      <a href="#stage5"><span class="lv">46–65</span><span class="nm">噩梦补强<br />刷抗性散件</span></a>
+      <a href="#respec" class="final"><span class="lv">≈65</span><span class="nm">洗点<br />转纯招</span></a>
+    </nav>
+  </section>
+
+  <!-- ================= CHECKER ================= -->
+  <section aria-labelledby="ck-h">
+    <div class="sec-head"><span class="no">叁</span><h2 id="ck-h">等级速查</h2></div>
+    <p class="sec-sub">拖到你现在的等级，直接看这一阶段该点什么、穿什么、去哪刷。练级时对着查，不用翻细则。</p>
+    <div class="checker">
+      <div class="checker-top">
+        <label for="lvRange">当前等级</label>
+        <input type="range" id="lvRange" min="1" max="65" value="18" step="1" aria-describedby="ckStage" />
+        <div class="lv-out"><span id="lvNum">18</span> <small>级</small></div>
+      </div>
+      <div class="ticks" aria-hidden="true"><span>1</span><span>12</span><span>18</span><span>30</span><span>46</span><span>65</span></div>
+      <div class="checker-grid">
+        <div class="ck ck-stage"><h4>所处阶段</h4><p id="ckStage"></p></div>
+        <div class="ck"><h4>技能重点</h4><p id="ckSkill"></p></div>
+        <div class="ck"><h4>属性目标</h4><p id="ckAttr"></p></div>
+        <div class="ck"><h4>装备目标</h4><p id="ckGear"></p></div>
+        <div class="ck"><h4>现在该做的事</h4><p id="ckTask"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STAGES ================= -->
+  <section aria-labelledby="st-h">
+    <div class="sec-head"><span class="no">肆</span><h2 id="st-h">五阶段加点细则</h2></div>
+
+    <article class="stage" id="stage1">
+      <div class="stage-head">
+        <div class="stage-badge"><span class="r">1–11</span><span class="u">普通 · 起手</span></div>
+        <div>
+          <h3>悬浮起手，回响主升</h3>
+          <p>先把「自己能打」立起来：悬浮精通解锁双手武器悬浮，之后每个技能点优先喂回响打击。</p>
+        </div>
+      </div>
+      <ul class="skills">
+        <li><span class="pt">1 点</span><span><b>悬浮精通</b> —— 解锁双手武器悬浮，第一时间点出</span></li>
+        <li><span class="pt">主升</span><span><b>回响打击</b> —— 核心单体输出，能点就点</span></li>
+        <li><span class="pt">1 点</span><span><b>召唤羊头人</b> —— 先有个肉盾在前面顶着</span></li>
+        <li><span class="pt pass">1 点</span><span><b>劈斩</b> —— 过路技能，点 1 即可</span></li>
+      </ul>
+      <p class="stage-note"><b>装备：</b>武器只看面板伤害，路上捡到更高的双手武器就换；<b>13 级做「钢铁」</b>（提尔 3号 + 艾尔 1号）当第一把正经武器。衣服有隐秘（塔尔 7号 + 伊司 5号）就穿上，跑速就是推图速度。</p>
+    </article>
+
+    <article class="stage" id="stage2">
+      <div class="stage-head">
+        <div class="stage-badge"><span class="r">12–17</span><span class="u">普通 · 解锁</span></div>
+        <div>
+          <h3>精通冲 5 点，第 2 只恶魔</h3>
+          <p>这一段的目标只有一个：恶魔精通硬点到 5，多一只恶魔就多一堵墙，回响打击不要停。</p>
+        </div>
+      </div>
+      <ul class="skills">
+        <li><span class="pt">奔满</span><span><b>回响打击</b> —— 继续主升，不分心</span></li>
+        <li><span class="pt">5 硬点</span><span><b>恶魔精通</b> —— 投到 5 硬点，解锁第 2 只恶魔</span></li>
+        <li><span class="pt">1 点</span><span><b>污染魔</b> —— 点出，丰富恶魔池</span></li>
+        <li><span class="pt pass">1 点</span><span><b>邪术冲击</b> —— 过路技能，点 1 即可</span></li>
+      </ul>
+      <p class="stage-note"><b>装备：</b>武器从钢铁过渡到<b>「力量」</b>（安姆 11号 + 提尔 3号）：25% 压碎性打击 + 7% 生命偷取，打精英和关底 Boss 明显变快。符文缺就回头刷普通女伯爵。</p>
+    </article>
+
+    <article class="stage" id="stage3">
+      <div class="stage-head">
+        <div class="stage-badge"><span class="r">18–29</span><span class="u">普通后段 – 噩梦前</span></div>
+        <div>
+          <h3>三只恶魔齐，保命件到位</h3>
+          <p>精通补到 10 硬点三只齐；位移、护盾、分摊伤害一次配齐，这套保命组合是贴脸流敢往前站的底气。</p>
+        </div>
+      </div>
+      <ul class="skills">
+        <li><span class="pt">10 硬点</span><span><b>恶魔精通</b> —— 补满到 10，第 3 只恶魔解锁，到此为止不再投</span></li>
+        <li><span class="pt">1 点</span><span><b>飞刃传形</b> —— 位移：赶路、脱围、调整站位都靠它</span></li>
+        <li><span class="pt">1 点</span><span><b>会心守御</b> —— 吸收伤害的护盾，进图常驻开着</span></li>
+        <li><span class="pt">1 点</span><span><b>血誓</b> —— 把你受到的部分伤害分摊给恶魔</span></li>
+        <li><span class="pt">1 点</span><span><b>死亡印记</b> —— 点谁集火谁，精英和 Boss 先上印记</span></li>
+        <li><span class="pt">1 点</span><span><b>污秽者</b> —— 点出，恶魔池补全</span></li>
+        <li><span class="pt">转投</span><span><b>镜影锋刃</b> —— 回响打击点满后，余点全部转投这里，清群主力成型</span></li>
+      </ul>
+      <p class="stage-note"><b>提醒：</b>恶魔精通只点到 10 就停。回响流的恶魔是盾不是矛，继续往上点是纯招的活，洗点之后再说。</p>
+    </article>
+
+    <article class="stage" id="stage4">
+      <div class="stage-head">
+        <div class="stage-badge"><span class="r">30–45</span><span class="u">噩梦 · 成型</span></div>
+        <div>
+          <h3>束缚点 1 点借力，镜影点满</h3>
+          <p>30 级点出束缚恶魔，抓一只自带光环的恶魔白嫖增益即可，前期不值得往高点——那是洗点后的事。</p>
+        </div>
+      </div>
+      <ul class="skills">
+        <li><span class="pt">1 点</span><span><b>束缚恶魔</b> —— 抓一只带光环的强力恶魔用着，不点高</span></li>
+        <li><span class="pt">点满</span><span><b>镜影锋刃</b> —— 本阶段第一优先级，清群效率拉满</span></li>
+        <li><span class="pt">1 点</span><span><b>迟缓符印</b> —— 混沌系，挂给 Boss 降速，站撸更安全</span></li>
+        <li><span class="pt">1 点</span><span><b>汲取咒印</b> —— 吸血续航，贴脸打怪自己回血</span></li>
+      </ul>
+      <p class="stage-note"><b>装备：</b>本阶段做<b>「眼光」长柄自己拿</b>（拉尔 8号 + 提尔 3号 + 塔尔 7号 + 索尔 12号）——冥思光环回蓝，回响和镜影随便放，蓝耗问题直接消失。佣兵换第二幕进攻型，力量光环给你和恶魔一起加伤害。</p>
+    </article>
+
+    <article class="stage" id="stage5">
+      <div class="stage-head">
+        <div class="stage-badge"><span class="r">46–65</span><span class="u">噩梦 · 补强</span></div>
+        <div>
+          <h3>补功能、刷抗性，为洗点做准备</h3>
+          <p>输出已经成型，剩下的点数补功能和分摊；装备重心从伤害转向抗性，给进地狱前的洗点留一个健康的底子。</p>
+        </div>
+      </div>
+      <ul class="skills">
+        <li><span class="pt">1 点</span><span><b>红液沸腾</b> —— 功能技能，点出即可</span></li>
+        <li><span class="pt">1 点</span><span><b>暴食</b> —— 功能技能，点出即可</span></li>
+        <li><span class="pt">回补</span><span><b>悬浮精通</b> —— 剩余点数回补，抬武器伤害的乘区</span></li>
+        <li><span class="pt">回补</span><span><b>血誓</b> —— 和悬浮精通交替回补，分摊比例越高越敢站</span></li>
+      </ul>
+      <p class="stage-note"><b>装备：</b>进地狱观感全看抗性。先去噩梦墨菲斯托刷几轮抗性散件，衣服换<b>「烟雾」</b>（耐夫 4号 + 卢姆 17号，+50 全抗）。约 60–65 级杀完噩梦巴尔，就到了洗点点位。</p>
+    </article>
+  </section>
+
+  <!-- ================= ATTR + PRIO ================= -->
+  <section aria-labelledby="attr-h">
+    <div class="sec-head"><span class="no">伍</span><h2 id="attr-h">属性点：力量够穿，其余全活力</h2></div>
+    <div class="attr-grid">
+      <div class="attr">
+        <div class="an">力量</div><div class="av">按需</div>
+        <p>跟着武器和装备的需求走。双手武器力量门槛不低，捡到什么补到什么，不预留、不超点。</p>
+        <div class="bar gold"><i data-echo-layout="echo-layout-2"></i></div>
+      </div>
+      <div class="attr">
+        <div class="an">敏捷</div><div class="av">不点</div>
+        <p>悬浮武器不走格挡路线，命中靠技能和装备词缀补，属性点投这里纯属浪费。</p>
+        <div class="bar none"><i data-echo-layout="echo-layout-3"></i></div>
+      </div>
+      <div class="attr">
+        <div class="an">活力</div><div class="av">全投</div>
+        <p>力量达标后每一滴都进活力。贴脸流的容错就是血池，血厚才敢站在镜影锋刃的输出距离里。</p>
+        <div class="bar"><i data-echo-layout="echo-layout-4"></i></div>
+      </div>
+      <div class="attr">
+        <div class="an">精力</div><div class="av">0 点</div>
+        <p>一点不投。前期靠药水和吸蓝词缀过渡，眼光长柄到手后冥思光环回蓝，蓝条不再是问题。</p>
+        <div class="bar none"><i data-echo-layout="echo-layout-5"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="prio-h">
+    <div class="sec-head"><span class="no">陆</span><h2 id="prio-h">技能优先级总序</h2></div>
+    <p class="sec-sub">迷路了就看这张：从上往下点，正在点的没满之前不碰下面，除了解锁类 1 点技能按阶段插队。</p>
+    <ol class="prio">
+      <li><span><b>回响打击</b> —— <span>第一时间奔满，全流派的单体输出地基</span></span></li>
+      <li><span><b>恶魔精通（到 10 硬点为止）</b> —— <span>5 点、10 点各解锁一只恶魔，是节奏点不是伤害点</span></span></li>
+      <li><span><b>镜影锋刃</b> —— <span>回响满后接力点满，清群效率决定推图速度</span></span></li>
+      <li><span><b>悬浮精通 / 血誓</b> —— <span>后期余点回补，一个抬伤害、一个抬容错</span></span></li>
+      <li><span><b>其余全部 1 点</b> —— <span>飞刃传形、会心守御、死亡印记、束缚恶魔、迟缓符印、汲取咒印：都是工具，1 点就够用</span></span></li>
+    </ol>
+  </section>
+
+  <!-- ================= WEAPONS ================= -->
+  <section aria-labelledby="wep-h">
+    <div class="sec-head"><span class="no">柒</span><h2 id="wep-h">武器就是一切：三段进化</h2></div>
+    <p class="sec-sub">回响伤害直接吃武器面板，所以换武器就是换流派强度。过渡逻辑只有一条：<strong>谁面板高用谁</strong>，符文之语按下面这个顺序接力，符文全带号数。</p>
+    <div class="chain">
+      <div class="node">
+        <div class="wl">13 级起 · 起手</div>
+        <div class="wn">钢铁 Steel</div>
+        <div class="runes">
+          <span class="rune">提尔 Tir <em>3号</em></span>
+          <span class="rune">艾尔 El <em>1号</em></span>
+        </div>
+        <p>2 孔近战武器。25% 攻速 + 伤害，普通前期最便宜的质变，女伯爵两三趟就凑齐。</p>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node">
+        <div class="wl">普通后段 · 打 Boss</div>
+        <div class="wn">力量 Strength</div>
+        <div class="runes">
+          <span class="rune">安姆 Amn <em>11号</em></span>
+          <span class="rune">提尔 Tir <em>3号</em></span>
+        </div>
+        <p>2 孔近战武器。25% 压碎性打击砍 Boss 血条，7% 生命偷取顺带解决续航。</p>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node final">
+        <div class="wl">噩梦 · 本流派核心</div>
+        <div class="wn">眼光 Insight</div>
+        <div class="runes">
+          <span class="rune">拉尔 Ral <em>8号</em></span>
+          <span class="rune">提尔 Tir <em>3号</em></span>
+          <span class="rune">塔尔 Tal <em>7号</em></span>
+          <span class="rune">索尔 Sol <em>12号</em></span>
+        </div>
+        <p>4 孔长柄，<strong>自己拿不用给佣兵</strong>。面板不俗 + 冥思光环回蓝，回响镜影从此随便放，一直用到洗点。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RUNEWORDS ================= -->
+  <section aria-labelledby="rw-h">
+    <div class="sec-head"><span class="no">捌</span><h2 id="rw-h">关键符文之语一览</h2></div>
+    <div class="rw-grid">
+      <div class="rw">
+        <div class="top"><span class="nm">钢铁</span><span class="slot">武器 · 2 孔近战</span></div>
+        <div class="runes"><span class="rune">提尔 <em>3号</em></span><span class="rune">艾尔 <em>1号</em></span></div>
+        <p class="eff">+25% 攻击速度、伤害与命中加成。13 级可做，开荒第一把正经武器。</p>
+        <p class="src"><b>获取：</b>普通女伯爵刷提尔、艾尔，底材商店或路上捡 2 孔武器。</p>
+      </div>
+      <div class="rw">
+        <div class="top"><span class="nm">力量</span><span class="slot">武器 · 2 孔近战</span></div>
+        <div class="runes"><span class="rune">安姆 <em>11号</em></span><span class="rune">提尔 <em>3号</em></span></div>
+        <p class="eff">25% 压碎性打击、7% 生命偷取、+20 力量。精英和关底 Boss 的加速器。</p>
+        <p class="src"><b>获取：</b>安姆刷普通女伯爵后段或普通牛场，钢铁的直接升级位。</p>
+      </div>
+      <div class="rw">
+        <div class="top"><span class="nm">眼光</span><span class="slot">武器 · 4 孔长柄</span></div>
+        <div class="runes"><span class="rune">拉尔 <em>8号</em></span><span class="rune">提尔 <em>3号</em></span><span class="rune">塔尔 <em>7号</em></span><span class="rune">索尔 <em>12号</em></span></div>
+        <p class="eff">冥思光环回蓝 + 高面板 + 暴击。本流派核心，自己手持，用到洗点。</p>
+        <p class="src"><b>获取：</b>符文刷女伯爵（普通凑低号、噩梦补齐）；白色长柄刷牛场，拉苏克打孔保底 4 孔。</p>
+      </div>
+      <div class="rw">
+        <div class="top"><span class="nm">隐秘</span><span class="slot">衣服 · 2 孔盔甲</span></div>
+        <div class="runes"><span class="rune">塔尔 <em>7号</em></span><span class="rune">伊司 <em>5号</em></span></div>
+        <p class="eff">+25% 跑速、+25% 施法速度。开荒衣服的答案：跑得快就是推得快。</p>
+        <p class="src"><b>获取：</b>普通女伯爵一趟齐活，2 孔盔甲商店有售。</p>
+      </div>
+      <div class="rw">
+        <div class="top"><span class="nm">烟雾</span><span class="slot">衣服 · 2 孔盔甲</span></div>
+        <div class="runes"><span class="rune">耐夫 <em>4号</em></span><span class="rune">卢姆 <em>17号</em></span></div>
+        <p class="eff">+50 全部抗性。进地狱观感的分水岭，噩梦阶段就提前做好。</p>
+        <p class="src"><b>获取：</b>卢姆（17号）刷噩梦女伯爵；做好后替换隐秘穿到洗点。</p>
+      </div>
+      <div class="rw">
+        <div class="top"><span class="nm">知识</span><span class="slot">头部 · 2 孔头盔</span></div>
+        <div class="runes"><span class="rune">欧特 <em>9号</em></span><span class="rune">索尔 <em>12号</em></span></div>
+        <p class="eff">+1 全部技能、击杀回蓝。全技能对回响、镜影和恶魔等级都是实打实的提升。</p>
+        <p class="src"><b>获取：</b>欧特、索尔刷普通女伯爵后段到噩梦女伯爵均可。</p>
+      </div>
+    </div>
+    <p class="sec-sub" data-echo-layout="echo-layout-6">其余部位不挑：攻速、生命/法力偷取、抗性散件，有什么穿什么。佣兵用第二幕的，进噩梦换<strong>进攻型（力量光环）</strong>，给你和三只恶魔一起加伤。</p>
+  </section>
+
+  <!-- ================= FARM ================= -->
+  <section aria-labelledby="farm-h">
+    <div class="sec-head"><span class="no">玖</span><h2 id="farm-h">要什么，去哪刷</h2></div>
+    <div class="farm">
+      <div class="fi">
+        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m19 5-3 3"/><path d="M22 12h-4"/><path d="m19 19-3-3"/><path d="M12 22v-4"/><path d="m5 19 3-3"/><path d="M2 12h4"/><path d="m5 5 3 3"/></svg></span>
+        <div><h4>低级符文（1–12 号）</h4><p><b>普通女伯爵</b>反复刷。钢铁、力量、隐秘、知识的符文都在她的掉落范围内，顺路练级。</p></div>
+      </div>
+      <div class="fi">
+        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+        <div><h4>中级符文（17 号卢姆等）</h4><p><b>噩梦女伯爵</b>。做烟雾缺的卢姆（17号）主要靠她，眼光缺符文时也回这里补。</p></div>
+      </div>
+      <div class="fi">
+        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 12.5 5 22"/><path d="m8 8-5.5 1L5 3.5 8 8Z"/><path d="m11 5 3.5-2.5L21 9l-2.5 3.5L11 5Z"/></svg></span>
+        <div><h4>4 孔长柄底材</h4><p><b>牛场</b>刷白色长柄（普通、噩梦都行），再用<b>拉苏克打孔任务</b>保底开出上限孔数，做眼光。</p></div>
+      </div>
+      <div class="fi">
+        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6l8-3 8 3v7Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><h4>抗性散件</h4><p><b>噩梦墨菲斯托</b>刷几轮。进地狱前把抗性堆起来，比多几点伤害重要得多。</p></div>
+      </div>
+      <div class="fi">
+        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></span>
+        <div><h4>高伤双手武器（过渡）</h4><p>沿途精英怪和商店淘换，<b>只看面板</b>。符文之语没接上之前，面板最高的双手武器就是最强的。</p></div>
+      </div>
+      <div class="fi">
+        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M18.4 5.6l-2.1 2.1"/><path d="M21 12h-3"/><path d="M18.4 18.4l-2.1-2.1"/><path d="M12 18v3"/><path d="M7.8 16.3l-2.2 2.1"/><path d="M6 12H3"/><path d="M7.8 7.7 5.6 5.6"/></svg></span>
+        <div><h4>经验</h4><p>正常推图为主；第 16 赛季开赛活动期（11 月 14–20 日）有<b>全图恐惧地带 + 奶牛关常驻</b>，赶进度时效率翻倍。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LOOP ================= -->
+  <section aria-labelledby="loop-h">
+    <div class="sec-head"><span class="no">拾</span><h2 id="loop-h">战斗循环：一句话打法</h2></div>
+    <p class="sec-sub">盾开着，恶魔先上，死亡印记点谁集火谁，Boss 挂迟缓站撸。每进一张新图从第一步重走一遍。</p>
+    <div class="loop">
+      <div class="step"><div class="sn">STEP 1</div><h4>开盾进场</h4><p>会心守御常驻，进图先确认护盾在身上，再往前走。</p></div>
+      <div class="step"><div class="sn">STEP 2</div><h4>恶魔先上</h4><p>三只恶魔和束缚恶魔顶在前面接第一波，你站在它们身后半个身位。</p></div>
+      <div class="step"><div class="sn">STEP 3</div><h4>印记集火</h4><p>死亡印记点精英或最肉的那只，全队火力跟着印记走。</p></div>
+      <div class="step"><div class="sn">STEP 4</div><h4>回响 + 镜影</h4><p>单体用回响打击，成群换镜影锋刃；被围立刻飞刃传形拉开。</p></div>
+      <div class="step"><div class="sn">STEP 5</div><h4>Boss 挂迟缓</h4><p>迟缓符印先挂上再输出，压碎打击（力量/眼光面板）负责啃血条。</p></div>
+    </div>
+  </section>
+
+  <!-- ================= SURVIVAL ================= -->
+  <section aria-labelledby="sur-h">
+    <div class="sec-head"><span class="no">拾壹</span><h2 id="sur-h">容易死吗？分阶段看</h2></div>
+    <div class="vs">
+      <div class="col">
+        <h3>风险来源</h3>
+        <ul>
+          <li>纯招是恶魔挡在前面、你站后面；回响是<strong>你自己贴脸输出</strong>，少了一堵完整的肉墙</li>
+          <li>前期装备优先堆伤害，抗性和血量容易跟不上等级</li>
+          <li>真正的暴毙期在<strong>地狱后半段 + 恐惧地带精英</strong>：抗性没补满时贴脸很危险</li>
+        </ul>
+      </div>
+      <div class="col win">
+        <h3>保命件（不是裸奔）</h3>
+        <ul>
+          <li><strong>会心守御</strong>：吸收伤害的盾，常驻开着</li>
+          <li><strong>血誓</strong>：把你受的伤害分一部分给恶魔，等于半堵墙还在</li>
+          <li><strong>汲取咒印</strong>：打怪回血，续航靠它不断档</li>
+          <li><strong>飞刃传形</strong>：位移技能，被围了能直接跳出来</li>
+          <li>普通、噩梦阶段伤害溢出，怪没围上来就清完了——危险期到来之前你已经洗回纯招</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESPEC ================= -->
+  <section aria-labelledby="respec-h" id="respec" data-echo-layout="echo-layout-7">
+    <div class="sec-head"><span class="no">拾贰</span><h2 id="respec-h">洗点转纯招：时机与衔接</h2></div>
+    <div class="respec">
+      <div class="when">
+        <span class="big">噩梦巴尔打完，约 60–65 级</span>
+        <span class="pill">用噩梦难度阿卡拉的免费洗点</span>
+      </div>
+      <ul>
+        <li><strong>为什么是这个点：</strong>回响的强势期正好覆盖普通 + 噩梦；地狱后段贴脸风险陡增，纯招的强度曲线则从这里开始接管。</li>
+        <li><strong>转过去点什么：</strong>束缚恶魔、恶魔精通、羊头人、死亡印记转为主力加点，血誓吃余点——束缚恶魔往 20 硬点走，开始抓头目、暗金乃至超级暗金当主力。</li>
+        <li><strong>装备衔接：</strong>烟雾和知识可以继续穿；武器位从眼光长柄换回法系思路，精神剑盾、橡树之心是下一个阶段的目标。</li>
+        <li><strong>洗点纪律：</strong>普通和地狱的两次阿卡拉洗点留着别动，后面调整流派细节时再用。</li>
+      </ul>
+      <ul class="timeline">
+        <li>
+          <span class="d">11 月 14 日 09:00</span>
+          <p>第 16 赛季开启，「恐怖遗产」活动同步开始：黑毛（超级暗黑破坏神）每 6 小时必刷、全图恐惧地带、奶牛关常驻、+100% MF。</p>
+        </li>
+        <li class="hot">
+          <span class="d">11 月 15 日 · 你回家</span>
+          <p>先用非赛季的毕业术士吃活动（不用练级直接刷黑毛），天梯新号用本页的回响路线速推，不抢第一天、照样赶上后面约 20 次黑毛场次。</p>
+        </li>
+        <li>
+          <span class="d">11 月 20 日 09:00</span>
+          <p>活动结束。此前把天梯号推过噩梦、完成洗点，地狱阶段用纯招稳扎稳打。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CHECKLIST + FAQ ================= -->
+  <section aria-labelledby="chk-h">
+    <div class="sec-head"><span class="no">拾叁</span><h2 id="chk-h">开局清单</h2></div>
+    <ul class="check">
+      <li><span class="box" aria-hidden="true"></span><span>1 级先点悬浮精通，武器只认面板最高的双手武器</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>普通女伯爵刷到出提尔（3号）+ 艾尔（1号），13 级做钢铁</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>恶魔精通硬点到 5（第 2 只）→ 10（第 3 只），到 10 立停</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>18 级后配齐：飞刃传形、会心守御、血誓、死亡印记各 1 点</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>牛场刷白色长柄 + 拉苏克打孔，做眼光自己拿</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>噩梦女伯爵刷卢姆（17号）做烟雾，进地狱前刷噩梦墨菲斯托补抗性</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>属性：力量够穿装备，其余全活力，精力 0 点</span></li>
+      <li><span class="box" aria-hidden="true"></span><span>噩梦巴尔后洗点转纯招；普通、地狱两次洗点留着不用</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="faq-h">
+    <div class="sec-head"><span class="no">拾肆</span><h2 id="faq-h">常见问题</h2></div>
+    <details>
+      <summary>没蓝怎么办？回响和镜影都很吃蓝。</summary>
+      <div class="body"><p>三段解决：前期多带蓝药 + 捡带吸蓝词缀的装备；中期知识头盔有击杀回蓝；眼光长柄到手后冥思光环持续回蓝，这个问题就不存在了。属性点永远不要投精力。</p></div>
+    </details>
+    <details>
+      <summary>恶魔精通为什么只点到 10，不点满？</summary>
+      <div class="body"><p>因为回响流里恶魔的职责是挡线和用血誓分摊伤害，不靠它们打伤害。10 硬点解锁第 3 只之后，边际收益骤降，点数喂给回响打击、镜影锋刃和悬浮精通的回报高得多。点满精通是洗点转纯招之后的事。</p></div>
+    </details>
+    <details>
+      <summary>30 级束缚恶魔只点 1 点，抓什么好？</summary>
+      <div class="body"><p>优先抓自带光环的恶魔（光环对全队生效，等于白嫖一个增益位），其次选血厚攻高的近战恶魔当第四堵墙。1 点束缚抓不了高阶目标，也不用纠结——抓强力目标是洗点后把束缚点高了才玩的。</p></div>
+    </details>
+    <details>
+      <summary>眼光为什么自己拿，不给佣兵？</summary>
+      <div class="body"><p>这个流派的输出在你自己手上：长柄面板直接决定回响伤害，冥思光环也要贴身才稳。佣兵带力量光环（第二幕进攻型）给你和恶魔加伤，分工更划算。</p></div>
+    </details>
+    <details>
+      <summary>洗点转纯招后，这身装备白做了吗？</summary>
+      <div class="body"><p>不白做。烟雾（+50 全抗）和知识（+1 技能）转纯招照样能穿；钢铁、力量、眼光是过渡武器，成本都是低中号符文，女伯爵几趟就回本。回响阶段省下的推图时间，远比这点符文值钱。</p></div>
+    </details>
+  </section>
+
+  <footer>
+    <p>高速开荒回响恶魔流 · 暗黑破坏神 II：重制版术士开荒路线（3.4 补丁 / 第 16 赛季适用；本补丁无职业技能改动，召唤与回响打法沿用上赛季结论）。</p>
+    <p>符文号数按游戏内编号标注；恶魔只数以「硬点」为准——装备与护符加的技能等级不计入解锁只数。封面为概念插画，非游戏截图。</p>
+  </footer>
+</div>
+
+
+<script type="module" src="/guides/s16/echo-demon.js"></script>
+</body>
+</html>

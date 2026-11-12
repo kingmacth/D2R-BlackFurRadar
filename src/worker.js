@@ -21,7 +21,11 @@ export default {
   async fetch(request, env) {
     let response;
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/api/')) {
+    const legacyGuide=url.pathname.match(/^\/guides\/(summon-warlock|echo-demon)(?:\.html)?$/);
+    if (legacyGuide) {
+      url.pathname=`/guides/s16/${legacyGuide[1]}`;
+      response=new Response(null,{status:308,headers:{location:url.href,'cache-control':'no-store'}});
+    } else if (url.pathname.startsWith('/api/')) {
       if (url.pathname === '/api/public' && request.method === 'GET') response = await radar(env).fetch(request);
       else if (!env.ADMIN_TOKEN) response = json({ error: '尚未配置管理密码 ADMIN_TOKEN' }, 503);
       else if (!(await authorized(request, env.ADMIN_TOKEN))) response = json({ error: '管理密码不正确' }, 401);

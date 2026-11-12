@@ -92,7 +92,7 @@
         btnEn.setAttribute('aria-pressed', String(en));
         document.documentElement.lang = en ? 'en' : 'zh-CN';
         document.title = en ? 'Summon Warlock Leveling Guide · Season 16 · DClone Radar' : '召唤术士开荒流程图 · 第16赛季 · 黑毛雷达';
-        document.getElementById('radar-brand').textContent = en ? '← DClone Radar · Leveling guide' : '← 黑毛雷达 · 开荒指南';
+        document.getElementById('radar-brand').textContent = en ? '← DClone Radar · S16 Pure Summoner' : '← 黑毛雷达 · S16 纯召唤';
         document.getElementById('guide-language-label').textContent = en ? 'Language' : '显示语言';
         radarSub.textContent = en ? 'Summon Warlock · Season 16 · Skill points, gear and farming routes' : '召唤术士 · 第16赛季 · 加点、配装与刷图路线';
         try { localStorage.setItem('radar-language', en ? 'en' : 'zh-CN'); } catch (_) {}

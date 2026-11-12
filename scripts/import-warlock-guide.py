@@ -5,12 +5,10 @@ import re
 from pathlib import Path
 
 root = Path(__file__).resolve().parent.parent
-sources = list(root.glob('*.html'))
-if len(sources) != 1:
-    raise SystemExit('Expected one supplied HTML guide in the project root')
-html = sources[0].read_text(encoding='utf-8-sig')
+source = root / '召唤术士开荒流程图.html'
+html = source.read_text(encoding='utf-8-sig')
 assert len(re.findall(r'<!doctype', html, re.I)) == 1
-destination = root / 'public' / 'guides'
+destination = root / 'public' / 'guides' / 's16'
 destination.mkdir(parents=True, exist_ok=True)
 
 def write_text_file(path, value):
@@ -25,12 +23,12 @@ def image_asset(match):
     name = f'warlock-{digest}.webp'
     (destination / name).write_bytes(data)
     images[name] = len(data)
-    return f'/guides/{name}'
+    return f'/guides/s16/{name}'
 html = re.sub(r'data:image/webp;base64,([A-Za-z0-9+/=]+)', image_asset, html)
 html = re.sub(r'^\s*<link[^>]*https://fonts\.(?:googleapis|gstatic)\.com[^>]*>\s*$', '', html, flags=re.M)
 
 styles = re.findall(r'<style[^>]*>(.*?)</style>', html, re.S)
-html = re.sub(r'<style[^>]*>.*?</style>', '<link rel="stylesheet" href="/guides/summon-warlock.css" />', html, flags=re.S)
+html = re.sub(r'<style[^>]*>.*?</style>', '<link rel="stylesheet" href="/guides/s16/summon-warlock.css" />', html, flags=re.S)
 inline_styles = {}
 def style_class(match):
     value = match.group(1)
@@ -50,11 +48,13 @@ write_text_file(destination / 'summon-warlock.css', css)
 
 js = '\n'.join(re.findall(r'<script[^>]*>(.*?)</script>', html, re.S))
 html = re.sub(r'<script[^>]*>.*?</script>', '', html, flags=re.S)
-html = html.replace('</body>', '<script src="/guides/summon-warlock.js" defer></script>\n  </body>')
+html = html.replace('</body>', '<script src="/guides/s16/summon-warlock.js" defer></script>\n  </body>')
 html = re.sub(r'<div class="brand">.*?<small id="radar-sub">(.*?)</small></div>',
-              r'<a class="brand" href="/" id="radar-home"><span id="radar-brand">← 黑毛雷达 · 开荒指南</span><small id="radar-sub">\1</small></a>', html, count=1, flags=re.S)
+              r'<a class="brand" href="/" id="radar-home"><span id="radar-brand">← 黑毛雷达 · S16 纯召唤</span><small id="radar-sub">\1</small></a>', html, count=1, flags=re.S)
 html = html.replace('<span class="lbl">语言 Language</span>', '<span class="lbl" id="guide-language-label">显示语言</span>')
 html = html.replace('<div class="wrap" id="wrapEn" hidden>', '<div class="wrap" id="wrapEn" lang="en" hidden>')
+html = html.replace('<div class="wrap" id="wrapZh">', '<div class="wrap" id="wrapZh"><p class="note season-note">S16 / 第16赛季专用 · 纯召唤流派。其他赛季的加点、配装与活动可能不同。</p>')
+html = html.replace('<div class="wrap" id="wrapEn" lang="en" hidden>', '<div class="wrap" id="wrapEn" lang="en" hidden><p class="note season-note">S16 / Season 16 · Pure summoner build. Skills, gear and events may differ in other seasons.</p>')
 
 start = js.index('      function setLang(lang){')
 end = js.index('      btnZh.addEventListener', start)
@@ -69,7 +69,7 @@ js = js[:start] + '''      function setLang(lang){
         btnEn.setAttribute('aria-pressed', String(en));
         document.documentElement.lang = en ? 'en' : 'zh-CN';
         document.title = en ? 'Summon Warlock Leveling Guide · Season 16 · DClone Radar' : '召唤术士开荒流程图 · 第16赛季 · 黑毛雷达';
-        document.getElementById('radar-brand').textContent = en ? '← DClone Radar · Leveling guide' : '← 黑毛雷达 · 开荒指南';
+        document.getElementById('radar-brand').textContent = en ? '← DClone Radar · S16 Pure Summoner' : '← 黑毛雷达 · S16 纯召唤';
         document.getElementById('guide-language-label').textContent = en ? 'Language' : '显示语言';
         radarSub.textContent = en ? 'Summon Warlock · Season 16 · Skill points, gear and farming routes' : '召唤术士 · 第16赛季 · 加点、配装与刷图路线';
         try { localStorage.setItem('radar-language', en ? 'en' : 'zh-CN'); } catch (_) {}

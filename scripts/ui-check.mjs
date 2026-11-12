@@ -19,6 +19,8 @@ for (const candidate of [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrom
 if (!browser) throw new Error('Set CHROME_PATH to an installed Chrome/Edge executable');
 const server = createServer(async (req,res) => {
   const pathname=new URL(req.url,'http://localhost').pathname;
+  const legacy=pathname.match(/^\/guides\/(summon-warlock|echo-demon)(?:\.html)?$/);
+  if(legacy){res.writeHead(308,{location:`/guides/s16/${legacy[1]}${new URL(req.url,'http://localhost').search}`});res.end();return;}
   res.setHeader('content-security-policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
   if(req.url.startsWith('/api/')) {
     if(req.url !== '/api/public' && req.headers.authorization !== 'Bearer test-password') {res.writeHead(401,{'content-type':'application/json'});res.end(JSON.stringify({error:'管理密码不正确'}));return;}
@@ -28,9 +30,9 @@ const server = createServer(async (req,res) => {
     }
     res.writeHead(200,{'content-type':'application/json'});res.end(JSON.stringify(state));return;
   }
-  const file = pathname === '/' ? 'index.html' : pathname === '/guides/summon-warlock' ? 'guides/summon-warlock.html' : pathname.slice(1);
-  if(!['index.html','app.js','i18n.js','style.css'].includes(file) && !/^guides\/(summon-warlock\.(html|js|css)|warlock-[a-f0-9]{12}\.webp)$/.test(file)) {res.writeHead(404);res.end();return;}
-  res.setHeader('content-type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.webp')?'image/webp':'text/html; charset=utf-8');
+  const file = pathname === '/' ? 'index.html' : /^\/guides\/s16\/(summon-warlock|echo-demon)$/.test(pathname) ? pathname.slice(1)+'.html' : pathname.slice(1);
+  if(!['index.html','app.js','i18n.js','style.css'].includes(file) && !/^guides\/s16\/(summon-warlock\.(html|js|css)|echo-demon\.(html|js|css|i18n\.json)|(echo|warlock)-[a-f0-9]{12}\.webp)$/.test(file)) {res.writeHead(404);res.end();return;}
+  res.setHeader('content-type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.webp')?'image/webp':file.endsWith('.json')?'application/json; charset=utf-8':'text/html; charset=utf-8');
   res.end(await readFile(new URL(`../public/${file}`,import.meta.url)));
 });
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
@@ -63,7 +65,8 @@ try {
   assert.equal(await evaluate(`document.getElementById('settings-panel').hidden`),true);
   assert.equal(await evaluate(`document.getElementById('check').hidden`),true);
   assert.equal(await evaluate(`document.getElementById('guide-nav').getBoundingClientRect().height>0`),true);
-  assert.equal(await evaluate(`document.getElementById('guide-nav').textContent`),'开荒指南 ↗');
+  assert.equal(await evaluate(`document.getElementById('guide-nav').textContent`),'S16 纯召唤 ↗');
+  assert.equal(await evaluate(`document.getElementById('echo-nav').textContent`),'S16 快速开荒 ↗');
   await mkdir('artifacts',{recursive:true});
   let screenshot=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
   await writeFile('artifacts/public.png',Buffer.from(screenshot.data,'base64'));
@@ -72,7 +75,8 @@ try {
   assert.equal(await evaluate(`document.getElementById('radar-status').textContent`),'Monitoring');
   assert.equal(await evaluate(`document.querySelector('.stage-message').textContent`),'Terror spreads across Sanctuary.');
   assert.equal(await evaluate(`document.getElementById('manage').textContent`),'Manage alerts');
-  assert.equal(await evaluate(`document.getElementById('guide-nav').textContent`),'Leveling guide ↗');
+  assert.equal(await evaluate(`document.getElementById('guide-nav').textContent`),'S16 Pure Summoner ↗');
+  assert.equal(await evaluate(`document.getElementById('echo-nav').textContent`),'S16 Fast Leveling ↗');
   assert.equal(await evaluate(`(()=>{const body=document.body.cloneNode(true);body.querySelectorAll('select').forEach(e=>e.remove());return /[\u3400-\u9fff]/u.test(body.textContent)})()`),false);
   await command('Page.reload');
   await until(`document.querySelectorAll('.progress-card').length===1`);
@@ -134,8 +138,35 @@ try {
   await guideShot('guide-en-desktop');
   await evaluate(`document.getElementById('radar-home').click()`);
   await until(`!!document.getElementById('language') && document.getElementById('language').value==='en'`);
+  assert.equal(await evaluate(`document.getElementById('echo-guide').compareDocumentPosition(document.getElementById('warlock-guide')) & Node.DOCUMENT_POSITION_FOLLOWING`),4);
+  await evaluate(`document.getElementById('echo-nav').click()`);
+  await until(`!!document.getElementById('guide-language') && document.getElementById('guide-language').value==='en' && document.getElementById('ckStage').textContent.includes('Stage')`);
+  assert.equal(await evaluate(`location.pathname`),'/guides/s16/echo-demon');
+  assert.equal(await evaluate(`document.querySelector('.season-tag').textContent.includes('S16')`),true);
+  await until(`document.querySelector('.hero img').complete && document.querySelector('.hero img').naturalWidth>0`);
+  await evaluate(`document.getElementById('lvRange').value='30';document.getElementById('lvRange').dispatchEvent(new Event('input'))`);
+  assert.equal(await evaluate(`document.getElementById('ckSkill').textContent.includes('Bind Demon')`),true);
+  await evaluate(`document.getElementById('guide-language').value='zh-CN';document.getElementById('guide-language').dispatchEvent(new Event('change'))`);
+  assert.equal(await evaluate(`document.getElementById('lvRange').value`),'30');
+  assert.equal(await evaluate(`document.getElementById('ckSkill').textContent.includes('束缚恶魔')`),true);
+  await evaluate(`document.getElementById('lvRange').value='65';document.getElementById('lvRange').dispatchEvent(new Event('input'))`);
+  assert.equal(await evaluate(`document.getElementById('ckStage').textContent.includes('阶段五')`),true);
+  await command('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+  assert.equal(await evaluate(`document.documentElement.scrollWidth<=innerWidth`),true);
+  await guideShot('echo-s16-zh-mobile');
+  await evaluate(`document.getElementById('guide-language').value='en';document.getElementById('guide-language').dispatchEvent(new Event('change'))`);
+  assert.equal(await evaluate(`document.getElementById('lvRange').value`),'65');
+  assert.equal(await evaluate(`document.getElementById('ckTask').textContent.includes('Nightmare Baal')`),true);
+  assert.equal(await evaluate(`(()=>{const body=document.body.cloneNode(true);body.querySelectorAll('select').forEach(e=>e.remove());return /[\u3400-\u9fff]/u.test(body.textContent)})()`),false);
+  await guideShot('echo-s16-en-mobile');
+  await command('Page.reload');
+  await until(`!!document.getElementById('guide-language') && document.getElementById('guide-language').value==='en' && document.documentElement.lang==='en'`);
+  await command('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+  await guideShot('echo-s16-en-desktop');
+  await evaluate(`document.getElementById('echo-home').click()`);
+  await until(`!!document.getElementById('echo-guide') && document.documentElement.lang==='en'`);
   assert.deepEqual(pageErrors,[]);
-  console.log('Browser QA passed: public dashboard, protected settings, bilingual UI, language persistence, guide entry/back link, both guide languages, level calculator, shared level on language switch, local images, mobile layout and strict CSP.');
+  console.log('Browser QA passed: radar controls, two independent S16 builds, fast-leveling priority, both guide languages, language persistence, both calculators, level retention, images, mobile layouts, return links and strict CSP.');
 } finally {
   if(ws?.readyState===1)ws.close();
   child.kill();
