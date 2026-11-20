@@ -8,3 +8,14 @@
 .guide-entry{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:23px 27px;margin-bottom:28px;border:1px solid #566442;background:linear-gradient(110deg,#25301e,#191e19);border-radius:3px}.guide-entry h2{font-size:20px;color:var(--accent)}.guide-entry p:last-child{margin:8px 0 0;color:var(--muted);font-size:12px}.guide-entry>span{font-size:28px;color:var(--accent)}.guide-entry:hover{border-color:var(--accent)}@media(max-width:600px){.guide-entry{padding:20px}.guide-entry h2{font-size:18px}}
 .guide-nav{border:1px solid #788d58;border-radius:3px;padding:6px 10px;font-size:12px;color:var(--accent);white-space:nowrap;background:#26321f}.guide-nav:hover{border-color:var(--accent);background:#303c24}@media(max-width:600px){.header-right{flex-wrap:wrap;justify-content:flex-end}}
 .header-right{flex-wrap:wrap;justify-content:flex-end}.build-options{margin:0 0 28px}.build-season-note{font-size:12px;color:var(--muted);margin:0 0 16px}.build-options .guide-entry{margin-bottom:14px}.fast-guide{border-color:#c28a43;border-left:4px solid #e8ad59;background:linear-gradient(110deg,#3b2b18,#191e19)}.fast-guide h2,.fast-guide .eyebrow,.fast-guide>span{color:#f0bd74}.fast-nav{border-color:#c28a43;color:#f0bd74;background:#382a19}@media(min-width:801px){header{height:auto;min-height:108px;gap:20px;padding-top:18px;padding-bottom:18px}.header-right{max-width:66%}}@media(max-width:800px){header{height:auto;min-height:88px;flex-wrap:wrap;gap:14px;padding-top:16px;padding-bottom:16px}}
+/* Public Terror Zone snapshot and independent admin subscriptions. */
+.terror-panel { margin: 22px 0; }
+.terror-panel h2 { margin: 8px 0; }
+.tz-current-next { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin: 18px 0; }
+.tz-card { padding: 18px; border: 1px solid #3b453a; border-radius: 10px; background: #151c17; }
+.tz-card h3 { font-size: 1.2rem; line-height: 1.5; margin: 10px 0; overflow-wrap: anywhere; }
+.tz-toggle { display: flex; align-items: center; gap: 10px; margin: 18px 0; }
+.tz-zone-choices { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.tz-zone-choices label { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; line-height: 1.5; cursor: pointer; }
+.tz-zone-choices input { flex: 0 0 auto; margin-top: 5px; }
+@media(max-width:640px) { .tz-current-next,.tz-zone-choices { grid-template-columns: 1fr; } }

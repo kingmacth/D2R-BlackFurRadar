@@ -1,5 +1,6 @@
 import { STAGES, initialState, validateSettings, observe, pendingEvents, recordEvent, labelOf } from './core.js';
 import { sourceInfo, querySource } from './sources.js';
+import { TZ_DEFAULTS, validateTerrorSettings, queryTerror, dueTerror, terrorMessage } from './terror.js';
 
 const json = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
 const securityHeaders = {
@@ -77,12 +78,24 @@ export class RadarState {
   }
   async handle(request) {
     const state = (await this.ctx.storage.get('state')) || initialState();
+    state.terror ??= {settings:structuredClone(TZ_DEFAULTS),snapshot:null,lastAttempt:null,error:null,pushError:null,sent:[],retryAt:0};
     const source = sourceInfo(this.env);
     const path = new URL(request.url).pathname;
     const sameSource = (state.provider || 'diablo2io') === source.id;
-    const visible = { settings: state.settings, rows: sameSource ? state.rows : [], lastAttempt: state.lastAttempt, lastSuccess: sameSource ? state.lastSuccess : null, sourceError: state.sourceError, source: source.url, sourceInfo: source };
+    const visible = { terrorZone:{snapshot:state.terror.snapshot,error:state.terror.error}, settings: state.settings, rows: sameSource ? state.rows : [], lastAttempt: state.lastAttempt, lastSuccess: sameSource ? state.lastSuccess : null, sourceError: state.sourceError, source: source.url, sourceInfo: source };
     if (request.method === 'GET' && path === '/api/public') return json(visible);
     if (request.method === 'GET' && path === '/api/status') return json({ ...state, ...visible, tracks: undefined, pushConfigured: Boolean(this.env.WXPUSH_TOKEN) });
+    if(request.method==='PUT' && path==='/api/terror-settings') {
+      if(!request.headers.get('content-type')?.includes('application/json')) return json({error:'A JSON request is required.'},415);
+      try {
+        const text=await request.text();
+        if(text.length>4096) return json({error:'The request is too large.'},413);
+        state.terror.settings=validateTerrorSettings(JSON.parse(text));
+      } catch(e) { return json({error:e.message},400); }
+      state.terror.retryAt=0;
+      await this.ctx.storage.put('state',state);
+      return json({settings:state.terror.settings});
+    }
     if (request.method === 'PUT' && path === '/api/settings') {
       if (!request.headers.get('content-type')?.includes('application/json')) return json({ error: '需要 JSON 请求' }, 415);
       if (Number(request.headers.get('content-length') || 0) > 8192) return json({ error: '请求过大' }, 413);
@@ -113,10 +126,35 @@ export class RadarState {
       }
     }
     if (request.method === 'POST' && ['/api/tick','/api/check'].includes(path)) {
+      await this.pollTerror(state);
       await this.poll(state);
-      return json({ ok: !state.sourceError, lastSuccess: state.lastSuccess, sourceError: state.sourceError, pushError: state.pushError });
+      return json({ ok: !state.sourceError, lastSuccess: state.lastSuccess, sourceError: state.sourceError, pushError: state.pushError, terrorError:state.terror.error });
     }
     return json({ error: 'Not found' }, 404);
+  }
+  async pollTerror(state) {
+    const now=Date.now(), tz=state.terror;
+    if(!tz.lastAttempt || (now-tz.lastAttempt>=60000 && (!tz.snapshot || now>=tz.snapshot.refreshAt))) {
+      tz.lastAttempt=now;
+      await this.ctx.storage.put('state',state);
+      try { tz.snapshot=await queryTerror(this.env,now); tz.error=null; }
+      catch { tz.error='Terror Zone data is temporarily unavailable.'; }
+      await this.ctx.storage.put('state',state);
+    }
+    if(!dueTerror(tz,Date.now())) return;
+    // Persist the due rotation before submitting; retry only before it starts.
+    tz.retryAt=Date.now()+60000;
+    await this.ctx.storage.put('state',state);
+    try {
+      await sendWechat(this.env,terrorMessage(tz.snapshot,this.env.SITE_URL));
+      tz.sent=[...tz.sent.filter(at=>at>now-86400000),tz.snapshot.nextAt];
+      tz.pushError=null;
+      recordEvent(state,{type:'terror',at:Date.now(),zone:tz.snapshot.next,message:`Terror Zone reminder: ${tz.snapshot.next}`});
+    } catch {
+      tz.pushError='Terror Zone WeChat delivery failed; retrying before the zone starts.';
+      recordEvent(state,{type:'error',at:Date.now(),message:'恐惧地带微信推送失败，将在开始前重试。'});
+    }
+    await this.ctx.storage.put('state',state);
   }
   async poll(state) {
     const now = Date.now();

@@ -10,7 +10,25 @@ A Cloudflare Worker that checks Diablo II: Resurrected DClone progress every min
 - Notifications continue while the browser is closed. Failed pushes are retried with backoff.
 - Two separate **S16** builds are available from independent homepage navigation links and cards: **Fast Leveling · Echoing Strike & Demons**, prominently featured first, and **Pure Summoner**. Their content and calculators are not merged.
 
-## Latest update — November 12, 2026
+## Latest update — November 20, 2026
+
+- Added public current/upcoming Terror Zones in Chinese and English.
+- Added independent WeChat subscriptions for multiple zone groups, with one reminder per matching rotation about five minutes before it starts.
+- Online regions share the same zones, so no additional region selector is needed. DClone tracking settings remain independent.
+
+## Terror Zone display and reminders
+
+Uses the [D2Runewizard public JSON API](https://d2runewizard.com/integration), `https://d2runewizard.com/api/trackers/terror-zone`, without an API token. The old `/api/terror-zone` redirects to this endpoint. The compared [diablo2.io tracker](https://diablo2.io/tzonetracker.php) displays current/upcoming zones and rotation times but has no equivalent public TZ JSON API, making D2Runewizard easier to integrate.
+
+The homepage shows current/upcoming zones with times in the browser's local timezone. Online zones are shared across regions, ladder modes and hardcore/softcore; there is no extra server selector. Offline single-player calendars are outside this feature. The current online rotation is 30 minutes. The simplified public payload contains zone names but no rotation timestamps; the adapter derives times from the origin Date header and the half-hour schedule, rejecting responses from a previous slot. Update the adapter if the game's rotation rules change.
+
+Sign in through “Manage alerts”, enable “Terror Zone WeChat reminders”, select one or more zone groups and save that form. Selecting Chaos Sanctuary alone alerts only for a matching upcoming zone. Linked areas form one subscription group; multiple matches in the same rotation produce one message. **Reminders default to disabled with no zones selected.** Subscriptions are shared settings for this deployment and reuse its self-hosted WeChat channel.
+
+Cloud checks run every minute. The delivery window opens five minutes before the next zone starts, generally giving about 4–5 minutes of notice. Upstream cache TTLs are respected; browser refreshes do not cause extra upstream calls. Missing predictions, failed queries and expired rotations never trigger reminders. Failed deliveries retry each minute until the zone starts; no late catch-up is sent. Successful delivery records and subscriptions survive redeployment. Ambiguous network timeouts may rarely cause duplicate delivery.
+
+Integration requests include `D2R-Contact`, `D2R-Platform` and `D2R-Repo`; the UI and messages link back to the data source. Set `TZ_CONTACT` to your contact email if desired. By default the project issues URL is used as the contact address, which the endpoint accepted in live testing. Follow the provider's caching and attribution policy.
+
+## S16 guide update — November 12, 2026
 
 - Added a separate fast-leveling Echoing Strike & Demons guide, complete English translation, and level 1–65 lookup.
 - Explicitly labeled both guides S16 and archived their assets under `/guides/s16/`. Future seasons should use separate directories rather than overwriting S16.

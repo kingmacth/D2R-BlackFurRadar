@@ -1,4 +1,6 @@
 const $ = id => document.getElementById(id);
+import { initTerror, renderTerror } from './terror-ui.js?v=20261120-tz';
+import { zoneLabel } from './tz-zones.js';
 document.querySelector('.domain').textContent = window.location.host;
 let token = '';
 let current = null;
@@ -35,6 +37,7 @@ function setAdminUI(admin) {
   $('manage').hidden = admin;
   $('settings-panel').hidden = !admin;
   $('history-panel').hidden = !admin;
+  $('terror-settings').hidden = !admin;
   $('check').hidden = !admin;
   $('workspace').classList.toggle('public-view', !admin);
 }
@@ -48,6 +51,7 @@ function matches(row, s) { return s.regions.includes(row.region) && s.ladders.in
 function label(r) { return `${r.ver === 1 ? 'LoD' : 'RotW'} · ${t(['','美服','欧服','亚服'][r.region])} · ${t(r.ladder === 1 ? '天梯' : '非天梯')} · ${t(r.hc === 1 ? '专家' : '普通')}`; }
 function render(data) {
   current = data;
+  renderTerror(data);
   const s = data.settings;
   const live = data.sourceInfo?.live === true;
   const direct = data.sourceInfo?.id === 'd2emu';
@@ -97,7 +101,8 @@ function render(data) {
   $('events').replaceChildren();
   for (const event of data.events || []) {
     const row = node('div', undefined, `event ${event.type}`);
-    row.append(node('time', date(event.at)), node('span', translateMessage(event.message)));
+    const message=event.type==='terror' ? `${t('恐惧地带提醒')} · ${zoneLabel(event.zone || event.message.replace('Terror Zone reminder: ',''),document.documentElement.lang)}` : translateMessage(event.message);
+    row.append(node('time', date(event.at)), node('span', message));
     $('events').append(row);
   }
   if (!data.events?.length) $('events').append(node('p', t('暂无通知记录。可以先发送一条微信测试消息。'), 'empty'));
@@ -159,6 +164,7 @@ $('language').addEventListener('change', e => {
   $('feedback').hidden = true;
   if (current) render(current);
 });
+initTerror({api,action,refresh,notify});
 applyLanguage();
 $('warlock-guide').href = `/guides/s16/summon-warlock?lang=${document.documentElement.lang}`;
 $('guide-nav').href = $('warlock-guide').href;
@@ -166,4 +172,4 @@ $('echo-guide').href = `/guides/s16/echo-demon?lang=${document.documentElement.l
 $('echo-nav').href = $('echo-guide').href;
 refresh().catch(e => notify(e.message, true));
 setInterval(() => { if (!document.hidden) refresh().catch(() => {}); }, 30000);
-import { t, formatDate as date, translateMessage, applyLanguage, setLanguage } from './i18n.js?v=20261112-s16-builds';
+import { t, formatDate as date, translateMessage, applyLanguage, setLanguage } from './i18n.js?v=20261120-tz';

@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-11-20
+
+- 新增中英文恐惧地带公开显示，展示当前、下一轮与本地时间；在线全区统一，不增加服务器选择。
+- 接入 D2Runewizard 无 token JSON 接口，使用新接口地址，携带集成标识、来源署名，遵守缓存 TTL。
+- 新增独立的微信提醒开关与 36 个可多选轮换区域组，默认关闭。下一轮命中订阅时开始前约 4–5 分钟提醒，同轮合并并去重。
+- 提醒设置与去重持久化；缺失预测、过期数据、接口错误不发送，微信失败仅在开始前重试。
+- 保留现有黑毛报警设置与两套 S16 攻略。补充提醒窗口、来源格式、失败重试、重启去重及公开接口隐私测试。
+
+Added bilingual public current/upcoming Terror Zones and independent multi-zone WeChat subscriptions. Online regions share the rotation. Matching upcoming zones are announced once per rotation about 4–5 minutes early, with durable deduplication and retries only before the start. Uses the public D2Runewizard JSON API with attribution and cache-aware polling. Existing DClone settings and S16 guides are preserved.
+
 ## 2026-11-12
 
 ### S16 双流派补充 / Separate S16 builds

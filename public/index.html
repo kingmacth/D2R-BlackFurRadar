@@ -4,12 +4,13 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101411">
   <meta name="description" content="暗黑破坏神 II 黑毛进度监控与微信报警">
-  <title>黑毛雷达 · D2R</title><link rel="stylesheet" href="/style.css?v=20261112-s16-builds"><script type="module" src="/app.js?v=20261112-s16-builds"></script>
+  <title>黑毛雷达 · D2R</title><link rel="stylesheet" href="/style.css?v=20261120-tz"><script type="module" src="/app.js?v=20261120-tz"></script>
 </head>
 <body>
   <header><a class="brand" href="/"><span class="brand-icon">Ⅵ</span><span>黑毛雷达<small>DIABLO II · CLONE WATCH</small></span></a><div class="header-right"><span class="domain">D2R CLONE WATCH</span><a id="echo-nav" class="guide-nav fast-nav" href="/guides/s16/echo-demon">S16 快速开荒 ↗</a><a id="guide-nav" class="guide-nav" href="/guides/s16/summon-warlock">S16 纯召唤 ↗</a><select id="language" aria-label="显示语言"><option value="zh-CN">中文</option><option value="en">English</option></select><button id="manage" class="quiet">管理设置</button><button id="logout" class="quiet" hidden>退出管理</button></div></header>
   <main>
     <section class="intro"><p class="eyebrow">庇护之地 · 预警哨站</p><h1>恐惧将至，<span>提前知晓。</span></h1><p class="subtitle">每分钟检查黑毛进度，关键时刻通过微信通知你。</p></section>
+    <section id="terror-zone" class="panel terror-panel" aria-live="polite"></section>
     <section class="build-options" aria-label="S16 开荒流派"><p class="eyebrow">S16 · 第16赛季专用攻略</p><p class="build-season-note">两个独立流派，按偏好选择；其他赛季另行更新。</p>
     <a id="echo-guide" class="guide-entry fast-guide" href="/guides/s16/echo-demon"><div><p class="eyebrow">S16 · 快速开荒方案</p><h2>高速开荒 · 回响恶魔流</h2><p>独立流派 · 自身输出、恶魔挡线 · 1–65 级速查 · 中英文</p></div><span aria-hidden="true">↗</span></a>
     <a id="warlock-guide" class="guide-entry" href="/guides/s16/summon-warlock"><div><p class="eyebrow">S16 · 纯召唤方案</p><h2>召唤术士开荒流程图</h2><p>独立流派 · 召唤物主攻 · 等级加点与阶段配装 · 中英文</p></div><span aria-hidden="true">↗</span></a></section>
@@ -30,6 +31,7 @@
           <div class="rule">达到阈值及以上时，每轮每个进度通知一次。回到进度 1 后开启新一轮。</div><button type="submit" class="primary save">保存设置 <span>→</span></button>
         </form><button id="test-push" class="test-button">发送微信测试消息 ↗</button>
       </section></div>
+      <section id="terror-settings" class="panel terror-panel" hidden></section>
       <section class="panel history" id="history-panel" hidden><div class="section-heading"><div><p class="eyebrow">ACTIVITY LOG</p><h2>通知记录</h2></div><span class="muted">最近 100 条</span></div><div id="events"></div></section>
       <p class="footnote">微信通道确认接收后记录成功。网络超时会重试，极少数情况下可能重复送达；未被轮询观测到的中间进度不会补发。</p>
     </div>

@@ -12,6 +12,8 @@ state.rows = [{region:3,ladder:1,hc:2,ver:2,progress:4,timestamped:Math.floor(Da
 state.sourceInfo = {id:'diablo2io',live:true};
 state.lastSuccess = Date.now();
 state.pushConfigured = true;
+state.terror={settings:{enabled:false,zones:['chaos']},sent:[]};
+state.terrorZone={snapshot:{current:'The Pit',next:'The Chaos Sanctuary',startAt:Math.floor(Date.now()/1800000)*1800000,nextAt:Math.floor(Date.now()/1800000)*1800000+1800000,checkedAt:Date.now()},error:null};
 let browser;
 for (const candidate of [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].filter(Boolean)) {
   try { await access(candidate); browser = candidate; break; } catch {}
@@ -28,10 +30,14 @@ const server = createServer(async (req,res) => {
       let body=''; for await(const chunk of req) body+=chunk;
       state.settings=JSON.parse(body);
     }
+    if(req.url === '/api/terror-settings') {
+      let body='';for await(const chunk of req)body+=chunk;
+      state.terror.settings=JSON.parse(body);
+    }
     res.writeHead(200,{'content-type':'application/json'});res.end(JSON.stringify(state));return;
   }
   const file = pathname === '/' ? 'index.html' : /^\/guides\/s16\/(summon-warlock|echo-demon)$/.test(pathname) ? pathname.slice(1)+'.html' : pathname.slice(1);
-  if(!['index.html','app.js','i18n.js','style.css'].includes(file) && !/^guides\/s16\/(summon-warlock\.(html|js|css)|echo-demon\.(html|js|css|i18n\.json)|(echo|warlock)-[a-f0-9]{12}\.webp)$/.test(file)) {res.writeHead(404);res.end();return;}
+  if(!['index.html','app.js','i18n.js','style.css','terror-ui.js','tz-zones.js'].includes(file) && !/^guides\/s16\/(summon-warlock\.(html|js|css)|echo-demon\.(html|js|css|i18n\.json)|(echo|warlock)-[a-f0-9]{12}\.webp)$/.test(file)) {res.writeHead(404);res.end();return;}
   res.setHeader('content-type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.webp')?'image/webp':file.endsWith('.json')?'application/json; charset=utf-8':'text/html; charset=utf-8');
   res.end(await readFile(new URL(`../public/${file}`,import.meta.url)));
 });
@@ -92,6 +98,12 @@ try {
   assert.equal(await evaluate(`document.querySelector('.progress-number').textContent`),'4 / 6');
   assert.equal(await evaluate(`document.querySelector('input[name=versions][value="2"]').checked`),true);
   assert.equal(await evaluate(`document.getElementById('radar-status').textContent`),'监控中');
+  assert.equal(await evaluate(`document.querySelectorAll('[name="tz-zones"]').length`),36);
+  assert.match(await evaluate(`document.getElementById('terror-zone').textContent`),/混沌避难所/);
+  await evaluate(`document.getElementById('tz-enabled').click();document.querySelector('[name="tz-zones"][value="travincal"]').click();document.querySelector('#terror-form button').click()`);
+  await until(`document.querySelector('#terror-form button')?.disabled===false`);
+  await delay(200);
+  assert.deepEqual(state.terror.settings,{enabled:true,zones:['travincal','chaos']});
   assert.equal(await evaluate(`document.documentElement.scrollWidth<=innerWidth`),true);
   await mkdir('artifacts',{recursive:true});
   const capture=async name=>{const r=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});await writeFile(`artifacts/${name}.png`,Buffer.from(r.data,'base64'));};

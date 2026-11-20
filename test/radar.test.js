@@ -112,6 +112,7 @@ test('DO retries failed sends, serializes overlapping polls, survives recreation
   t.mock.method(Date,'now',()=>clock);
   let sourceCalls=0,pushCalls=0,failPush=true,failSource=false;
   t.mock.method(globalThis,'fetch',async url=>{
+    if(String(url).includes('d2runewizard.com'))return Response.json({current:'The Pit',next:'Travincal'});
     if(String(url).includes('/api/v1/dclone')) {
       sourceCalls++;
       if(failSource) return new Response('unavailable',{status:503});
@@ -194,6 +195,7 @@ test('public automatic snapshots alert without credentials; switching providers 
   const ctx={storage:{get:async()=>structuredClone(state),put:async(_,v)=>state=structuredClone(v)}};
   let clock=now;t.mock.method(Date,'now',()=>clock);
   t.mock.method(globalThis,'fetch',async(url)=>{
+    if(String(url).includes('d2runewizard.com'))return Response.json({current:'The Pit',next:'Travincal'});
     if(String(url).includes('dclone_api'))return Response.json([row(4)]);
     if(String(url).includes('d2emu.com'))return Response.json({krSoftcoreLadder:{status:3}});
     pushes++;return new Response('ok');

@@ -1,4 +1,6 @@
 const translations = {
+  '恐惧地带提醒':'Terror Zone reminder',
+  '恐惧地带微信推送失败，将在开始前重试。':'Terror Zone WeChat delivery failed; retrying before the zone starts.',
   'S16 快速开荒 ↗': 'S16 Fast Leveling ↗',
   'S16 纯召唤 ↗': 'S16 Pure Summoner ↗',
   'S16 开荒流派': 'S16 leveling builds',
